@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>多层组件通信</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-parent :imgtitle111="title"></my-parent>
+        <!-- 第一次绑定 -->
+    </div>
+    <template id="my_parent">
+        <!-- 父组件 -->
+        <div>
+            <!-- 必须存在的包裹标签 -->
+            <child2 :title222="imgtitle111"></child2>
+        </div>
+    </template>
+    <template id="my_title">
+        <!-- 最后输出 -->
+        <h2>{{title222}}</h2>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript">
+    //1.子组件的实例
+    let Child2 = {
+        props: ['title222'],
+        template: '#my_title' //指向模板
+    };
+
+    //2.注册父组件
+
+    Vue.component('my-parent', {
+        props: ['imgtitle111'],
+        components: { //内部注册了两个子组件
+
+            'child2': Child2
+        },
+        template: '#my_parent' //指向模板
+    });
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            title: '风景美不美啊啊啊',
+        }
+    })
+    </script>
+</body>
+
+</html>
