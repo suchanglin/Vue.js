@@ -10,14 +10,22 @@
 </head>
 
 <body>
-    <div id="example">{{message}}</div>
+    <div id="app">
+        <my-div></my-div>
+    </div>
+    <template id="my_div">
+        <span>  <!-- 必须有一个包裹标签才能同时输出以下两行 -->
+        <span>我是MT！mmm</span>
+        <div>you are beautiful</div>
+        </span>
+    </template>
     <script type="text/javascript">
-    var vm = new Vue({
-        el: '#example',
-        data: {
-            message: 'Hello'
-        },
-    })
+    Vue.component('my-div', {
+        template: '#my_div'
+    });
+    new Vue({
+        el: '#app',
+    });
     </script>
 </body>
 
