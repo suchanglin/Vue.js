@@ -3,7 +3,7 @@
  */
 new Vue({
     el: ".container",
-    data: { //这里就是整个vue的模型
+    data: {
         addressList: [],
         limitNum: 3,
         moreCard: true,
@@ -32,7 +32,7 @@ new Vue({
     computed: { //实时计算
         filterAddress: function() {
             return this.addressList.slice(0, this.limitNum); //通过computed监听器限制显示3张卡片
-            // 内置slice方法截取列表前三项
+            // 内置slice方法截取列表前三项，返回新数组，原数组不变
         }
     },
     methods: {
@@ -50,14 +50,19 @@ new Vue({
                 }
             });
         },
-        setDefault: function(item, index) {
-            this.addressList.forEach(function(address) {
-                address.isDefault = false;
+        setDefault: function(itemobject, index) {
+            this.addressList.forEach(function(address,index) {
+                if(address.addressId == itemobject.addressId){
+                     address.isDefault = true;
+                }else {
+                     address.isDefault = false;
+                }
+
             });
-            item.isDefault = true;
+            // item.isDefault = true;
             this.addressList.splice(index, 1);
-            this.addressList.unshift(item); //unshift方法向数组开头添加一个或多个元素，并返回新的长度
-            this.currentIndex = 0; //无效，因为添加了点击事件@click="currentIndex = index"
+            this.addressList.unshift(itemobject); //unshift方法向数组开头添加一个或多个元素，并返回新的长度
+            // this.currentIndex = 0; //无效，因为添加了点击事件@click="currentIndex = index"
         },
         delConfirm: function(index) {
             this.delFlag = true;
@@ -85,7 +90,7 @@ new Vue({
         },
         saveAddress: function() {
             if (this.editWay == 0) {
-                this.addressList.splice(this.editIndex, 1, this.newAddress); //用编辑后的新地址代替新地址
+                this.addressList.splice(this.editIndex, 1, this.newAddress); //用编辑后的新地址代替编辑前的地址
             } else {
                 this.addressList.push(this.newAddress); //在数组末尾插入新地址
             }

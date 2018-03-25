@@ -85,7 +85,7 @@ var vm = new Vue({
         },
         delProduct: function() {
             this.delFlag = false;
-            this.productList.splice(this.delIndex, 1);
+            this.productList.splice(this.delIndex, 1); //this.delIndex由delComfirm函数保存下来的
         }
     },
 
