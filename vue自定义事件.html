@@ -16,16 +16,16 @@
             template: `<div>
                         <input type="text" v-model="message" />
                         <button v-on:click="handleSendMessage">Send</button>
-                      </div>`,
-            data () {
+                       </div>`,
+            data() {
                 return {
                     message: 'test message'
                 }
             },
             methods: {
                 handleSendMessage: function() {
-                    this.$emit('message',{message:this.message} ),
-                    this.message = ''
+                    this.$emit('message', { message: this.message }),
+                        this.message = ''
                 }
             }
         })
@@ -41,7 +41,6 @@
                 }
             }
         })
-
         </script>
     </div>
 </body>

@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <!--     <script src="https://unpkg.com/vue"></script>
- -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
@@ -20,11 +18,13 @@
         </span>
     </template>
     <script type="text/javascript">
+    // 注册全局组件
     Vue.component('my-div', {
-        template: '#my_div'
+        template: "#my_div"
     });
+    // 实例化在组件之后
     new Vue({
-        el: '#app',
+        el: "#app",
     });
     </script>
 </body>

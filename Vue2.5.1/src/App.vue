@@ -2,14 +2,12 @@
   <div id="app">
     <input type="text" v-model="inputValue" />
     <button @click="handleAdd">添加TodoList</button>
-
     <ul>
       <item-todolist v-for="(item,index) of list" :key="index" :content="item" :index="index" @delete="handleDelete">
       </item-todolist>
     </ul>
   </div>
 </template>
-
 <script>
   import todolist from './components/todolist'
 
