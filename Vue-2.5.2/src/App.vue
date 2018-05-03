@@ -1,5 +1,5 @@
 <template>
-  <div id="app">    
+  <div id="app">
     <router-link to="/TestApp">
     	<button>这是清单一号</button>
     </router-link>
@@ -11,8 +11,9 @@
 </template>
 
 <script>
+
   export default {
-    
+
   }
 </script>
 
@@ -22,7 +23,7 @@
   	height: auto;
   	margin: 80px auto;
   	border: #42B983 solid 1px;
-  	text-align: center;  	
+  	text-align: center;
   	padding: 30px 0;
   }
   #app button{
