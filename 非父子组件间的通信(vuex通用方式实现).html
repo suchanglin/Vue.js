@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>非父子组件间的通信(vuex通用方式实现)</h3>
+        <p>{{ count }}</p>
+        <my-addbtn></my-addbtn>
+        <my-remove></my-remove>
+    </div>
+    <script>
+    const store = new Vuex.Store({
+        state: {
+            count: 0
+        },
+        mutations: {
+            add: state => state.count++,
+            remove: state => state.count--
+        }
+    });
+
+    var M1 = {
+        template: '<button @click="setCount">+</button>',
+        methods: {
+            setCount: function() {
+                store.commit('add');
+            }
+        }
+    };
+    var M = {
+        template: '<button @click="setCount">-</button>',
+        methods: {
+            setCount: function() {
+                store.commit('remove');
+            }
+        }
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        computed: {
+            count() {
+                return store.state.count
+            }
+        },
+
+        components: {
+            'my-addbtn': M1,
+            'my-remove': M,
+
+        },
+    });
+    </script>
+</body>
+
+</html>

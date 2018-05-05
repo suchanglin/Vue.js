@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- <script src="https://unpkg.com/vuex"></script> -->
+</head>
+
+<body>
+    <div id="app">
+        <h3>非父子组件间的通信(简单空实例实现)</h3>
+        <p>{{ count }}</p>
+        <my-addbtn :count="count"></my-addbtn>
+        <my-remove :count="count"></my-remove>
+    </div>
+    <script>
+    // const store = new Vuex.Store({
+    //     state: {
+    //         count: 0
+    //     },
+    //     mutations: {
+    //         add: state => state.count++,
+    //         remove: state => state.count--
+    //     }
+    // });
+    var busVM = new Vue();
+    var M1 = {
+        template: '<button @click="setCount">+</button>',
+        props: ['count'],
+        methods: {
+            setCount: function() {
+                busVM.$emit('changeEvents', this.count + 1);
+            }
+        }
+    };
+    var M2 = {
+        template: '<button @click="setCount">-</button>',
+        props: ['count'],
+        methods: {
+            setCount: function() {
+                busVM.$emit('changeEvents', this.count - 1);
+            }
+        }
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            count: 0
+        },
+        mounted: function() {
+            busVM.$on('changeEvents', function(num) {
+                this.count = num;
+            }.bind(this));
+        },
+
+        components: {
+            'my-addbtn': M1,
+            'my-remove': M2,
+
+        },
+    });
+    </script>
+</body>
+
+</html>
