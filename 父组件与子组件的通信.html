@@ -31,7 +31,7 @@
         // props:['content','index'], //与下面等效
         props: {
             content: {
-                type: String
+                type: ''
             },
             index: {
                 type: Number
@@ -42,6 +42,7 @@
             handleClick: function() {
 
                 this.$emit('delete', this.index)  //向外发布自定义事件delete
+                console.log(this);
             }
         }
     });
