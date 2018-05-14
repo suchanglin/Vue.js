@@ -28,7 +28,7 @@
     </div>
     <script>
     Vue.component('todo-item', {
-        // props:['content','index'], //与下面等效
+        // props:['content','index'], // 与下面等效
         props: {
             content: {
                 type: ''
@@ -41,7 +41,7 @@
         methods: {
             handleClick: function() {
 
-                this.$emit('delete', this.index)  //向外发布自定义事件delete
+                this.$emit('delete', this.index)  // 向外发布自定义事件delete
                 console.log(this);
             }
         }
