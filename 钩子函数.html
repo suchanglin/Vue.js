@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <!-- <script src="https://unpkg.com/vuex"></script> -->
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <p>{{messageReverse}}</p>
+        <input type="text" v-model="message" @click="changeBgColor" :title="message">
+    </div>
+    <script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: '123456789'
+        },
+        computed: {
+            messageReverse: function() {
+                return this.message.split('').reverse().join('');
+            }
+        },
+        methods: {
+            changeBgColor: function(ev) {
+                ev.target.style.background = 'red'
+            }
+        },
+        updated: function() {  // watch优先打印到控制台【
+            console.log(456)
+        },
+
+        mounted: function() {
+            console.log(123)
+        },
+        watch:{
+          message:function (news,olds) {
+            console.log(news);
+            console.log(olds);
+          }
+        }
+
+    });
+
+   // vue组件其实是一个可扩展的vue实例
+    // var myComponent = Vue.extend({
+    //   data:function () {
+    //     return {
+    //       message:'hello vue'
+    //     }
+    //   }
+    // });
+
+    // var vm = new myComponent({
+    //   el:'#app'
+    //   不用再写data，已经继承了上述的data
+    // });
+
+    </script>
+</body>
+
+</html>

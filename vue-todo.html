@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vue-todo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="newTodoText" @keyup.enter="addNewTodo" placeholder="Add a todo">
+        <ul>
+            <!-- <li is="todo-item" -->
+            <todo-item v-for="(todo, index) in todos" :key="todo.id" :title="todo.title" @remove="todos.splice(index, 1)">
+            </todo-item>
+            <!-- </li> -->
+        </ul>
+    </div>
+    <script>
+    // Vue.component('TodoItem', { // todo-item 也是可以的
+    // props: ['title'],
+    // template: `<li>{{ title }}<button @click="$emit('remove')">X</button></li>`
+    // });
+    var TodoItem = {
+        props: ['title'],
+        template: `<li>{{ title }}<button @click="$emit('remove')">X</button></li>`
+    };
+    new Vue({
+        el: '#app',
+        data: {
+            newTodoText: '',
+            nextTodoId: 4,
+            todos: [{
+                    id: 1,
+                    title: 'Do the dishes',
+                },
+                {
+                    id: 2,
+                    title: 'Take out the trash',
+                },
+                {
+                    id: 3,
+                    title: 'Mow the lawn'
+                }
+            ]
+        },
+        components: {
+            TodoItem
+        },
+        methods: {
+            addNewTodo() {
+                if (this.newTodoText == '') {
+                    this.newTodoText = 'Please add something...'
+                }
+                this.todos.push({
+                    id: this.nextTodoId++,
+                    title: this.newTodoText
+                });
+                this.newTodoText = ''
+            },
+        }
+    })
+    </script>
+</body>
+
+</html>
