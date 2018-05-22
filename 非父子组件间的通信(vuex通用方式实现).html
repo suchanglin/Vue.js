@@ -23,6 +23,11 @@
         mutations: {
             add: state => state.count++,
             remove: state => state.count--
+        },
+        actions: {
+            addAction({commit}) {
+                commit('add')
+            }
         }
     });
 
@@ -30,7 +35,7 @@
         template: '<button @click="setCount">+</button>',
         methods: {
             setCount: function() {
-                store.commit('add');
+                store.dispatch('addAction');
             }
         }
     };
@@ -52,8 +57,11 @@
         },
 
         components: {
-            'my-addbtn': M1,
-            'my-remove': M2,
+            // 'my-addbtn': M1,  // 这种写法必须为字符串，非驼峰式
+            // 'my-remove': M2
+            MyAddbtn:M1,
+            MyRemove:M2
+           // 最佳实践是，MyAddbtn代替M1变量，则键值对中直接写键，无需写值，即components:{MyAddbtn}
 
         },
     });

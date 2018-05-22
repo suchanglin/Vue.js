@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多层组件通信</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-parent :title1="title"></my-parent>
+    </div>
+    <script type="text/javascript">
+
+    var ChildList = {
+        props: ['title2'],
+        template:  `<h2>{{title2}}</h2`
+    };
+
+    var MyParent = {
+        props:['title1'],
+        template:`<child-list :title2="title1"></child-list>`,
+        components:{ ChildList }
+    };
+
+// 总结：绑定的prop不能存在短横线-和下划线_，这是一个坑哦
+// 注册的时候ChildList和MyParent是有先后顺序的
+// 疑问：嵌套比较多的时候，一定需要层层传递吗？vuex的出场
+    new Vue({
+        el: '#app',
+        data: {
+          title:'这是最开始的源数据'
+        },
+        components: { MyParent }
+    })
+    </script>
+</body>
+
+</html>
