@@ -12,6 +12,7 @@
     <div id="app">
         <p>{{ count }}</p>
         <button @click="addAction">+</button>
+        <button @click="increment">-</button>
     </div>
     <script>
     // 唯一实例store
@@ -19,28 +20,40 @@
         state: { // 一个state对象包含了所有层级
             count: 0
         },
+        getters:{
+
+        },
         mutations: {
-            increment (state) {
+            increment11 (state) {
                 state.count++
+            },
+            decrement (state) {
+                state.count--
             }
         },
         actions: {
             addAction11({commit}) {
-                commit('increment')
-            }
+                // commit('increment11') // 即可调用
+                setTimeout(function(){commit('increment11')},3000)  // 异步调用，3秒后执行
+            },
+            // addAction11(context) {  // 参数的另一种写法
+            // //     context.commit('increment11')
+            //        setTimeout(function(){context.commit('increment11')},3000)
+
+            // }
         }
     });
     new Vue({
         el: '#app',
         computed: {
             count() {
-                return store.state.count += 1000 // 缺少return会报错
+                return store.state.count += 10000000 // 缺少return会报错，无论加减，每次都执行
             }
         },
         methods: {
             // ...mapMutations(['increment']),
-            increment() { store.commit('increment') },
-            addAction() { store.dispatch('addAction11') },
+            addAction() { store.dispatch('addAction11') }, // 必须dispatch去触发actions，再commit
+            increment() { store.commit('decrement') },   // commit去提交mutations，
             // ...mapActions(['addAction']),
             // store.dispatch('addAction')
         }
