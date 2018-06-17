@@ -27,10 +27,11 @@
         },
         methods: {
             changeBgColor: function(ev) {
+                console.log(ev.target);
                 ev.target.style.background = 'red'
             }
         },
-        updated: function() {  // watch优先打印到控制台【
+        updated: function() {
             console.log(456)
         },
 

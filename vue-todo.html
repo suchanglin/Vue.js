@@ -12,7 +12,7 @@
         <input v-model="newTodoText" @keyup.enter="addNewTodo" placeholder="Add a todo">
         <ul>
             <!-- <li is="todo-item" -->
-            <todo-item v-for="(todo, index) in todos" :key="todo.id" :title="todo.title" @remove="todos.splice(index, 1)">
+            <todo-item v-for="(todo, index) in todos" :key="todo.id" :title="todo.title" @remove="removeit">
             </todo-item>
             <!-- </li> -->
         </ul>
@@ -24,7 +24,13 @@
     // });
     var TodoItem = {
         props: ['title'],
-        template: `<li>{{ title }}<button @click="$emit('remove')">X</button></li>`
+        template: `<li>{{ title }}<button @click='delit'>X</button></li>`,
+        methods: {
+            delit:function () {  // 修改上述@click='delit',当处理函数为delete时为什么无反应？
+                console.log(this);
+                this.$emit('remove')
+            }
+        }
     };
     new Vue({
         el: '#app',
@@ -59,6 +65,11 @@
                 });
                 this.newTodoText = ''
             },
+            removeit(index) {  // 注意无参数时出错,@remove="removeit"父组件可以没有参数
+            // @remove="todos.splice(index, 1)">修改为@remove="removeit"
+               console.log(this);
+               this.todos.splice(index, 1)
+            }
         }
     })
     </script>

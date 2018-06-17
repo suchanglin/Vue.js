@@ -27,25 +27,37 @@
         </div>
     </div>
     <script>
-    Vue.component('todo-item', {
-        // props:['content','index'], // 与下面等效
-        props: {
-            content: {
-                type: ''
-            },
-            index: {
-                type: Number
-            }
-        },
-        template: '<li @click="handleClick">{{content}}点击删除×</li>',
-        methods: {
-            handleClick: function() {
+        var TodoItem = {
+            props:['content','index'],
+            template: '<li @click="handleClick">{{content}}点击删除×</li>',
+            methods: {
+                handleClick: function() {
 
-                this.$emit('delete', this.index)  // 向外发布自定义事件delete
-                console.log(this);
+                    console.log(this); // VueComponent
+                    this.$emit('delete', this.index)  // 向外发布自定义事件delete
+                }
             }
-        }
-    });
+
+        };
+    // Vue.component('todo-item', {
+    //     // props:['content','index'], // 与下面等效
+    //     props: {
+    //         content: {
+    //             type: ''
+    //         },
+    //         index: {
+    //             type: Number
+    //         }
+    //     },
+    //     template: '<li @click="handleClick">{{content}}点击删除×</li>',
+    //     methods: {
+    //         handleClick: function() {
+
+    //             console.log(this); // VueComponent
+    //             this.$emit('delete', this.index)  // 向外发布自定义事件delete
+    //         }
+    //     }
+    // });
 
    new Vue({
         el: "#root",
@@ -60,8 +72,12 @@
                 this.inputValue = ''
             },
             handleDelete: function(index) {
+                console.log(this); // Vue
                 this.list.splice(index, 1)
             }
+        },
+        components:{
+            TodoItem
         }
     })
     </script>

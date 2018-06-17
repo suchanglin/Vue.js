@@ -31,7 +31,7 @@
         props: ['count'],
         methods: {
             setCount: function() {
-                busVM.$emit('changeEvents', this.count + 1);
+                busVM.$emit('changeEvents', this.count + 1); // 发布自定义事件
             }
         }
     };
@@ -50,9 +50,9 @@
         data: {
             count: 0
         },
-        mounted: function() {
+         created:function() {  // mounted替换created也是可以的
             // var that = this;
-            busVM.$on('changeEvents', function(num) {
+            busVM.$on('changeEvents', function(num) {  // 监听自定义事件
                 // that.count = num;
                 this.count = num;
             }.bind(this)); // 回调函数属于深一层的嵌套函数，必须重新绑定this的指向

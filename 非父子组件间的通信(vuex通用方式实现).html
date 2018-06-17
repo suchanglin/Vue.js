@@ -22,11 +22,14 @@
         },
         mutations: {
             add: state => state.count++,
-            remove: state => state.count--
+            removeit: state => state.count--
         },
         actions: {
-            addAction({commit}) {
+            addAction({commit}) {   // 参数是对象
                 commit('add')
+            },
+            remove(context) {   // 参数的另一种写法
+                context.commit('removeit')
             }
         }
     });
@@ -35,7 +38,7 @@
         template: '<button @click="setCount">+</button>',
         methods: {
             setCount: function() {
-                store.dispatch('addAction');
+                store.dispatch('addAction');  // dispatch触发
             }
         }
     };
@@ -43,7 +46,7 @@
         template: '<button @click="setCount">-</button>',
         methods: {
             setCount: function() {
-                store.commit('remove');
+                store.dispatch('remove');
             }
         }
     };
@@ -52,7 +55,7 @@
         el: '#app',
         computed: {
             count() {
-                return store.state.count
+                return store.state.count  // 虽然count属于父组件，但vuex无需props传值
             }
         },
 

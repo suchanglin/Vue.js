@@ -17,19 +17,21 @@
         </p>
     </div>
     <script>
-        //唯一实例store
+        // 唯一实例store
     const store = new Vuex.Store({
-        state: {   //一个state对象包含了所有层级
+        state: {   // 一个state对象包含了所有层级
             count: 0
         },
         mutations: {
-            increment: function(state) {
-               state.count++
+             increment:state => state.count++,
+            // increment: function(state) {
+            //    state.count++
 
-            },
-            decrement: function(state) {
-                state.count--
-            }
+            // },
+             decrement:state => state.count--
+            // decrement: function(state) {
+            //     state.count--
+            // }
         },
 
     });
@@ -38,7 +40,7 @@
         el: '#app',
         computed: {
             count:function() {
-                return store.state.count
+                return store.state.count // 实时监听属性变化
             }
         },
         methods: {
