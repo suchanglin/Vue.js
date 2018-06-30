@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>vuex</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+</head>
+
+<body>
+    <!--  <div id="app">
+  <p>{{ count }}</p>
+  <p>
+    <button @click="increment1">+</button>
+    <button @click="decrement1">-</button>
+  </p>
+</div>
+<script>
+
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment2: state => state.count++,
+    decrement2: state => state.count--
+  }
+})
+
+new Vue({
+  el: '#app',
+  computed: {
+    count () {
+      return store.state.count
+    }
+  },
+  methods: {
+    increment1 () {
+      store.commit('increment2')
+    },
+    decrement1 () {
+      store.commit('decrement2')
+    }
+  }
+})
+</script> -->
+    <div id="app">
+        <counter></counter>
+        <p>
+            <button @click="increment">+</button>
+            <button @click="reducenum">-</button>
+        </p>
+    </div>
+    <script>
+    const store = new Vuex.Store({
+        state: {
+            count: 0
+        },
+        mutations: {
+            increment(state) {
+                state.count++
+            },
+            reduce(state) {
+                state.count-=10
+            }
+        },
+
+        actions: {
+            reduceit({ commit }) { var timer = setInterval(function(){commit('reduce')},10);
+             }
+             // 异步，每秒减1，点击-可以叠加速度。点击+也不受影响。
+        }
+    });
+    const Counter = {
+        template: `<div>{{ count }}</div>`,
+        computed: {
+            count() {   // count在哪里，那么computed就在那里进行计算。此处count在子组件
+                return this.$store.state.count
+            }
+        }
+    };
+
+    const app = new Vue({
+        el: '#app',
+        store, // 根组件注册之后，每个子组件都被注入，即子组件this.$store.state.XX即可访问
+        methods: {
+            increment() {
+                store.commit('increment')
+            },
+            reducenum() {
+                store.dispatch('reduceit')
+            }
+        },
+        components: { Counter }
+    })
+    </script>
+</body>
+
+</html>
