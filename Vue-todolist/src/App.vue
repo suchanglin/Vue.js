@@ -3,13 +3,18 @@
     <input type="text" v-model="inputValue" />
     <button @click="handleAdd">添加TodoList</button>
     <ul>
-      <item-todolist v-for="(item,index) of list" :key="index" :content="item" :index="index" @delete="handleDelete">
+      <item-todolist
+        v-for="(item,index) in list"
+        :key="index"
+        :content="item"
+        :index="index"
+        @delete="handleDelete">
       </item-todolist>
     </ul>
   </div>
 </template>
 <script>
-  import todolist from './components/todolist'
+  import ItemTodolist from './components/todolist'
 
   export default {
     name: 'App',
@@ -29,7 +34,8 @@
       }
     },
     components: {
-      "item-todolist": todolist
+      // "item-todolist": todolist
+      ItemTodolist
     }
   }
 </script>

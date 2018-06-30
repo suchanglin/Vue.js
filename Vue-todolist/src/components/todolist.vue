@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <li @click="handleOnclick">{{content}}</li>
   </div>
 </template>
@@ -17,5 +17,5 @@
 </script>
 
 <style scoped>
-
+  li {list-style-type: none;border: 1px solid red;margin: 10px;background-color: green;height: 33px }
 </style>
