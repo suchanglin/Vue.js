@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ count }}</p>
+        <add-num></add-num>
+        <red-num></red-num>
+    </div>
+    <script type="text/javascript">
+    const store = new Vuex.Store({
+        state: {
+            count: 0
+        },
+        mutations: {
+            increment: state => state.count++,
+            decrement: state => state.count--
+        },
+        actions:{
+            incre: ({commit}) => commit('increment'),
+            decre: ({commit}) => commit('decrement')
+        }
+
+    });
+
+    const AddNum = {
+        template: '<button @click="toadd">+</button>',
+        methods: {
+            toadd() { // vm中注册了store,子组件可使用store.dispatch或this.$store.dispatch
+                this.$store.dispatch('incre')
+            }
+        }
+    };
+
+    const RedNum = {
+        template: '<button  @click="tomin">-</button>',
+        methods: {
+            tomin() {
+                this.$store.dispatch('decre')
+            }
+        },
+    };
+
+   var vm = new Vue({
+        el: '#app',
+        store,  // 缺少store选项时，下面改为 return store.state.count
+        computed: {
+            count() {
+                return store.state.count
+            }
+        },
+        components: {
+            AddNum,
+            RedNum
+        }
+    })
+    </script>
+</body>
+
+</html>
