@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>明灯小站</title>
+<script src="http://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+<div id="app">{{message}}</div>
+<script>
+var vm = new Vue({
+    el: '#app',
+    data: {
+        title: 'my first lesson'
+    },
+    computed: {
+        message: {
+            // getter
+            get: function () {
+                return this.title
+            },
+            // setter
+            set: function (newValue) {
+                this.title = newValue
+            }
+        }
+    }
+})
+vm.message = 'my second lesson';
+</script>
+</body>
+</html
+
+//  先执行set再执行get
