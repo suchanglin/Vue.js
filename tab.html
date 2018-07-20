@@ -1,69 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>ss</title>
-  <style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ss</title>
+    <style>
     .tab-button {
-      padding: 6px 10px;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      background: #f0f0f0;
-      margin-bottom: -1px;
-      margin-right: -1px;
+        padding: 6px 10px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        background: #f0f0f0;
+        margin-bottom: -1px;
+        margin-right: -1px;
     }
+
     .tab-button:hover {
-      background: #e0e0e0;
+        background: #e0e0e0;
     }
+
     .tab-button.active {
-      background: #fff444;
+        background: #fff444;
     }
+
     .tab {
-      border: 1px solid #ccc;
-      padding: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
     }
-  </style>
-  <script src="https://unpkg.com/vue"></script>
+    </style>
+    <script src="https://unpkg.com/vue"></script>
 </head>
+
 <body>
     <div id="dynamic-component-demo" class="demo">
-      <button
+        <button
         v-for="tab in tabs"
         v-bind:key="tab"
         v-bind:class="['tab-button', { active: currentTab === tab }]"
-        v-on:click="currentTab=tab">{{ tab }}</button><!-- 'Home', 'Posts', 'Archive' 这个click参数赋值也是一个难点-->
-      <component
-        v-bind:is="currentTabComponent"
-        class="tab"
-      ></component>
+        v-on:click="currentTab=tab">{{ tab }}</button>
+        <!-- 'Home', 'Posts', 'Archive' 这个click参数赋值也是一个难点,
+        v-on:click="currentTab=tab"可以改写为v-on:click="changtab(tab)"-->
+        <component v-bind:is="currentTabComponent" class="tab"></component>
     </div>
     <script type="text/javascript">
-      Vue.component('tab-home', {
+    Vue.component('tab-home', {
         template: '<div>Home component</div>'
-      });
-      Vue.component('tab-posts', {
+    });
+    Vue.component('tab-posts', {
         template: '<div>Posts component</div>'
-      });
-      Vue.component('tab-archive', {
+    });
+    Vue.component('tab-archive', {
         template: '<div>Archive component</div>'
-      });
+    });
 
-      new Vue({
+    new Vue({
         el: '#dynamic-component-demo',
         data: {
-          currentTab: 'Home',  // 默认按钮
-          tabs: ['Home', 'Posts', 'Archive'] // 罗列出来三个按钮
+            currentTab: 'Home', // 默认按钮,值根据需要由methods改变
+            tabs: ['Home', 'Posts', 'Archive'] // 罗列出来三个按钮
         },
         computed: {
-          currentTabComponent: function () {  // 由data默认按钮选择默认的tab-home组件
-            return 'tab-' + this.currentTab.toLowerCase()  // tab-home  tab-posts tab-archive
-          }
-        }
+            currentTabComponent: function() { // 由data默认按钮选择默认的tab-home组件
+                return 'tab-' + this.currentTab.toLowerCase() // tab-home  tab-posts tab-archive
+            }
+        },
+        // methods:{ // 模板的修改参考button的注释
+        //   changtab (content){
+        //     this.currentTab = content
+        //   }
+        // }
 
-   });
-  </script>
+    });
+    </script>
 </body>
+
 </html>
