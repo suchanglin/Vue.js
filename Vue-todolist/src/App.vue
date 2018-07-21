@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <input type="text" v-model="inputValue" />
     <button @click="handleAdd">添加TodoList</button>
     <ul>
