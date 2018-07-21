@@ -5,19 +5,30 @@
     <title>todoList</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
-
 <body>
     <div id="todo-list-example">
-        <input v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="Add a todo">
+        <input
+        v-model="newTodoText"
+        v-on:keyup.enter="addNewTodo"
+        placeholder="Add a todo">
         <ul>
-            <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title" v-on:remove="todos.splice(index, 1)"></li>
+            <li is="todo-item"
+            v-for="(todo, index) in todos"
+            v-bind:key="todo.id"
+            v-bind:title="todo.title"
+            v-on:remove="del"></li>
         </ul>
     </div>
     <script>
-    Vue.component('todo-item', {
-        template: '<li>{{ title }}<button v-on:click="$emit(\'remove\')">X</button></li>',
-        props: ['title']
-    })
+    var TodoItem =  {
+        template: '<li>{{ title }}<button v-on:click="remov">X</button></li>',
+        props: ['title'],
+        methods:{
+            remov () {
+                this.$emit('remove')
+            }
+        }
+    };
 
     new Vue({
         el: '#todo-list-example',
@@ -45,7 +56,13 @@
                     title: this.newTodoText
                 })
                 this.newTodoText = ''
+            },
+            del (index) {
+                this.todos.splice(index, 1)
             }
+        },
+        components:{
+            TodoItem
         }
     })
     </script>
