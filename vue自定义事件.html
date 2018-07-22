@@ -25,7 +25,7 @@
             },
             methods: {
                 handleSendMessage() {
-                    this.$emit('custom', { infomation: this.message }), // 自定义事件custom
+                    this.$emit('custom', { infomation: this.message }); // 自定义事件custom
                         this.message = ''
                 }
             }
