@@ -13,7 +13,8 @@
         <button-message @custom="handleMessage"></button-message>
     </div>
     <script>
-        Vue.component('button-message', {
+
+        var ButtonMessage = {
             template: `<div>
                         <input type="text" v-model="message"/>
                         <button @click="handleSendMessage">Send</button>
@@ -29,7 +30,7 @@
                         this.message = ''
                 }
             }
-        })
+        };
 
         new Vue({
             el: '#app',
@@ -40,8 +41,11 @@
                 handleMessage(payload) {
                     this.lists.push(payload.infomation)
                 }
+            },
+            components:{
+                ButtonMessage
             }
-        })
+        });
     </script>
 </body>
 
