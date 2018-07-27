@@ -13,10 +13,20 @@
         <p>{{ count }}</p>
         <p>
             <button @click="increment">+</button>
-            <button @click="decrement">-</button>
+            <button-dec >-</button-dec>
         </p>
     </div>
     <script>
+        var ButtonDec = {
+            template:'<button @click="decrement"></button>',
+            methods:{
+                decrement () {
+                // this.$store.commit('decrem')
+                store.commit('decrem');  // 为什么不能this.$store.commit('decrem')
+
+                }
+            }
+        };
         // 唯一实例store
     const store = new Vuex.Store({
         state: {   // 一个state对象包含了所有层级
@@ -28,7 +38,7 @@
             //    state.count++
 
             // },
-             decrement:state => state.count--
+             decrem:state => state.count--
             // decrement: function(state) {
             //     state.count--
             // }
@@ -45,11 +55,14 @@
         },
         methods: {
             increment() {
-                store.commit('increment');
+                store.commit('increment');  // 子组件用this.$store.commit('increment')???
             },
-            decrement() {
-                store.commit('decrement');
-            }
+            // decrement() {
+            //     store.commit('decrement');
+            // }
+        },
+        components:{
+            ButtonDec
         }
     });
     </script>
