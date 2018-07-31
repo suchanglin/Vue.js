@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>测试钩子函数</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <!-- <script src="https://unpkg.com/vuex"></script> -->
 </head>
@@ -18,31 +17,32 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            message: '123456789'
+            message: '123456789' // 初始源数据
         },
         computed: {
             messageReverse: function() {
-                return this.message.split('').reverse().join('');
+                return this.message.split('').reverse().join(''); // 设置计算属性，由依赖自动执行
             }
         },
         methods: {
-            changeBgColor: function(ev) {
+            changeBgColor: function(ev) {  //
                 console.log(ev.target);
                 ev.target.style.background = 'red'
             }
         },
-        updated: function() {
+        updated: function() {  // watch监听到变化后，执行函数，理想情况设置截流
             console.log(456)
         },
 
         mounted: function() {
-            console.log(123)
+            console.log(123)  // 挂载之后就直接运行
         },
         watch:{
-          message:function (news,olds) {
+          message:function (news,olds) {  // 对源数据监听
             console.log(news);
             console.log(olds);
           }
+
         }
 
     });
@@ -58,7 +58,6 @@
 
     // var vm = new myComponent({
     //   el:'#app'
-    //   不用再写data，已经继承了上述的data
     // });
 
     </script>
