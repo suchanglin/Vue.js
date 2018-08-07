@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>嵌套组件</title>
+</head>
+<body>
+
+<div id="app">
+	<my-app></my-app>
+</div>
+
+<script type="text/x-template" id="my-app-template">
+	<div>
+		<my-header header="header: 嵌套组件"></my-header>
+		<my-content content="content: 内容"></my-content>
+		<my-footer footer="footer: 页脚"></my-footer>
+	</div>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript">
+
+	var Header = Vue.component('my-header', {
+		template: '<div>{{header}}</div>',
+		props: ['header']
+	});
+
+	var Content = Vue.component('my-content', {
+		template: '<div>{{content}}</div>',
+		props: ['content']
+	});
+
+	var Footer = Vue.component('my-footer', {
+		template: '<div>{{footer}}</div>',
+		props: ['footer']
+	});
+
+	var App = Vue.component('my-app', {
+		template: '#my-app-template'
+	});
+
+	new Vue({
+		el: '#app'
+	});
+</script>
+
+</body>
+</html>

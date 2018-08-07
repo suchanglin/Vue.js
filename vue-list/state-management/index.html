@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>状态管理</title>
+	<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+
+<div id="app">
+	<my-app></my-app>
+</div>
+
+<script type="text/x-template" id="app-template">
+	<div class="container my-app">
+		<div class="example-row">
+			<input type="text" class="form-control my-input" v-model="text">
+			<button class="btn btn-primary" v-on:click="handleAddClick">点击添加</button>
+		</div>
+		<my-counter></my-counter>
+		<div class="example-row">
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<td>序号</td>
+						<td>内容</td>
+						<td>创建时间</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item, index) in items">
+						<td>{{index + 1}}</td>
+						<td>{{item.text}}</td>
+						<td>{{renderDate(item.createdAt)}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex"></script>
+<script type="text/javascript" src="../node_modules/vue-strap/dist/vue-strap.js"></script>
+<script type="text/javascript">
+
+	var store = new Vuex.Store({
+		state: {
+			items: []
+		},
+		// 同步
+		mutations: {
+			addItems: function(state, payload){
+				state.items.push({
+					text: payload.text,
+					createdAt: new Date() - 0
+				});
+			},
+			initItems: function(state, payload){
+				state.items = payload;
+			}
+		},
+		// 异步
+		actions: {
+			addItemsAsync: function(context, payload){
+				setTimeout(function(){
+					context.commit('addItems', payload);
+				}, 500)
+			}
+		}
+	});
+
+	var App = Vue.component('my-app', {
+		template: '#app-template',
+		data: function(){
+			return {
+				localKey: 'myAppItems',
+				text: ''
+			};
+		},
+		computed: {
+			items: function(){
+				return this.$store.state.items;
+			}
+		},
+		computed: Vuex.mapState(['items']),
+		methods: {
+			handleAddClick: function(){
+				if(this.text){
+					// this.$store.commit('addItems', {
+					// 	text: this.text
+					// });
+					this.$store.dispatch('addItemsAsync', {
+						text: this.text
+					});
+					this.text = '';
+				}
+			},
+			renderDate: function(createdAt){
+				var date = new Date(createdAt);
+				var ret = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日';
+				ret += ' ' + date.getHours() + '时' + date.getMinutes() + '分' + date.getSeconds() + '秒';
+				return ret;
+			}
+		},
+		watch: {
+			items: function(items){
+				localStorage.setItem(this.localKey, JSON.stringify(items));
+			}
+		},
+		mounted: function(){
+			var items = localStorage.getItem(this.localKey);
+			if(!items){
+				items = [];
+			}
+			this.$store.commit('initItems', JSON.parse(items));
+			console.log('my app mounted');
+		}
+	});
+
+	var Counter = Vue.component('my-counter', {
+		template: '<div class="example-row">当前共有<span class="text-danger">{{count}}</span>条记录</div>',
+		computed: {
+			count: function(){
+				return this.$store.state.items.length;
+			}
+		}
+	});
+
+	new Vue({
+		el: '#app',
+		store: store,
+		mounted: function(){
+
+		}
+	});
+</script>
+
+</body>
+</html>

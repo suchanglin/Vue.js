@@ -1,0 +1,7 @@
+body { background: #eee; margin: 0; padding: 0; }
+.app { width: 600px; margin: 0 auto; padding: 10px; background: #fff; }
+.app h1 { text-align: center; margin: 0; padding: 20px 0; }
+.app .nav { margin-bottom: 10px; }
+.app .nav a { margin-right: 15px; }
+.app .content { border: 1px solid #eee; padding: 10px 0; }
+.app .content li { padding: 8px 0; }

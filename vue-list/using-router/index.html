@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>路由</title>
+	<link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body>
+
+<div id="app" class="app">
+	<h1>路由例子</h1>
+	<!-- 使用 router-link 组件来导航. -->
+    <!-- 通过传入 `to` 属性指定链接. -->
+	<div class="nav">
+		<router-link to="/list">列表</router-link>
+    	<!--<router-link to="/detail">详情</router-link>-->
+	</div>
+	<!-- 路由出口 -->
+	<!-- 路由匹配到的组件将渲染在这里 -->
+	<div class="content">
+		<router-view></router-view>
+	</div>
+</div>
+
+<script type="text/x-template" id="list-template">
+	<div class="list">
+		<ul>
+			<li v-for="(item, index) in items">
+				<router-link v-bind:to="renderLink(item)">{{item.label}}</router-link>
+			</li>
+		</ul>
+	</div>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script type="text/javascript">
+	var Detail = Vue.component('my-detail', {
+		template: '<div>用户详情：{{renderDetail()}}</div>',
+		methods: {
+			renderDetail: function(){
+				var uid = this.$route.params.uid;
+				var item = items.find(function(item){
+					return item.value === uid;
+				});
+				if(item){
+					return item.label;
+				}else{
+					return '默认';
+				}
+			}
+		}
+	});
+
+	var items = [
+		{label: '程序猿小卡', value: '1'},
+		{label: '程序猿大卡', value: '2'},
+	];
+
+	var List = Vue.component('my-list', {
+		// template: '<div>内容：列表</div>',
+		template: '#list-template',
+		data: function () {
+			return {
+				items: items
+			};
+		},
+		methods: {
+			renderLink: function(item){
+				return '/detail/' + item.value;
+			}
+		}
+	});
+
+	var routes = [
+		{ path: '/', component: List },
+		{ path: '/list', component: List },
+		{ path: '/detail/:uid', component: Detail }
+	];
+
+	var router = new VueRouter({
+		routes: routes
+	});
+
+	var App = new Vue({
+		router: router
+	}).$mount('#app');
+
+</script>
+</body>
+</html>

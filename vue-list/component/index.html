@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>自定义组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-app title="自定义组件"></my-app>
+    </div>
+    <script type="text/x-template" id="my-app-template">
+        <div>
+            <div>{{title}}</div>
+            <div>{{version}}</div>
+        </div>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script type="text/javascript">
+    var App = Vue.component('my-app', {
+        template: '#my-app-template',
+        props: ['title'],
+        data () {
+            return {
+                version: '2.1.0'
+            };
+        }
+    });
+    new Vue({
+        el: '#app'
+    });
+    </script>
+</body>
+
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>自定义组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-app title="自定义组件"></my-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script type="text/javascript">
+    var MyApp = {
+        template: `<div>
+                     <div>{{title}}</div>
+                     <div>{{version}}</div>
+                   </div>
+                   `,
+        props: ['title'],
+        data () {
+            return {
+                version: '2.1.0'
+            };
+        }
+    };
+    new Vue({
+        el: '#app',
+        components:{
+          MyApp
+        }
+    });
+    </script>
+</body>
+
+</html>
+ -->

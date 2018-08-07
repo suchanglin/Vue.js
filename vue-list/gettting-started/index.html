@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>入门例子</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="text" v-model="message" />
+            <button @click="revertMessage">revert</button>
+        </div>
+        <p>what you input is: {{message}}</p>
+        <p>toUpperCase(): {{upperCaseMessage}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script type="text/javascript">
+    var App = new Vue({
+        el: '#app',
+        data: {
+            message: 'Nice to meet you!'
+        },
+        computed: {
+            upperCaseMessage () {
+                return this.message.toUpperCase();
+            }
+        },
+        methods: {
+            revertMessage () {
+                this.message = this.message.split('').reverse().join('');
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>
