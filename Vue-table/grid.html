@@ -3,10 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <link rel="stylesheet" href="">
+    <title>筛选和排序</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuex"></script>
 </head>
 <body>
    <script type="text/x-template" id="grid-template">
@@ -64,17 +62,17 @@
          computed: {
            filteredData: function () {
              var sortKey = this.sortKey
-             var filterKey = this.filterKey && this.filterKey.toLowerCase()
+             var filterKey = this.filterKey && this.filterKey.toLowerCase() // 表单输入小写化
              var order = this.sortOrders[sortKey] || 1
              var data = this.data
              if (filterKey) {
-               data = data.filter(function (row) {
+               data = data.filter(function (row) { // 由表单输入判断数组是否存在这一项
                  return Object.keys(row).some(function (key) {
                    return String(row[key]).toLowerCase().indexOf(filterKey) > -1
                  })
                })
              }
-             if (sortKey) {
+             if (sortKey) { // 上述得到新的数组后（若能筛选出来），对新的数组进行排序
                data = data.slice().sort(function (a, b) {
                  a = a[sortKey]
                  b = b[sortKey]
@@ -92,7 +90,7 @@
          methods: {
            sortBy: function (key) {
              this.sortKey = key
-             this.sortOrders[key] = this.sortOrders[key] * -1
+             this.sortOrders[key] = this.sortOrders[key] * -1 // 反排序
            }
          }
        })
