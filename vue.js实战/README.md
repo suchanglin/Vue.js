@@ -44,9 +44,9 @@
     + README ----- 项目介绍
 
 ## 项目文件百度网盘
+PS:强烈建议购买正版书阅读。
 
 [项目代码 + 《Vue.js实战》电子版zip](https://pan.baidu.com/s/1dHX384DAO1vVw3l0CubX0Q)
-PS:强烈建议购买正版书阅读。
 
 
 
