@@ -6,8 +6,8 @@
 </head>
 <body>
 	<div id="app">
-		<p v-if="show">这是一段文本</p>
-		<button v-on:click="handleClose">点击隐藏</button>
+		<p v-if="show">这是一段文本内容</p>
+		<button v-on:click="handleClose">{{text}}</button>
 		<!-- v-on:绑定事件监听器。可简写成@  表达式可以是一个方法名，都写在实例的methods属性内-->
 		<!-- 表达式除了方法名也可以是内联语句 -->
 		<!-- <button v-on:click="show = false">点击隐藏</button> -->
@@ -18,12 +18,18 @@
 		var app = new Vue({
 			el:'#app',
 			data:{
-				show:true
+				show:true,
+				text:'点击隐藏'
 			},
 			methods:{
 				handleClose:function(){
 					// this.show = false;
 					this.show = !this.show;
+					if (!this.show) {
+						this.text = '点击隐藏'
+					}else{
+						this.text = '点击展示'
+					}
 				}
 			}
 		})
