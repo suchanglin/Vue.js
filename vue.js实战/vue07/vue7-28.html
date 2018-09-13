@@ -18,7 +18,7 @@
 			methods:{
 				getText:function(){
 					this.showDiv = true; //执行这里时vue扔没创建div
-					// console.log(document.getElementById('div').innerHTML)
+					console.log(document.getElementById('div'))
 					this.$nextTick(function(){ //$nextTick用来知道什么时候DOM更新完成的
 						var text = document.getElementById('div').innerHTML;
 						console.log(text);
