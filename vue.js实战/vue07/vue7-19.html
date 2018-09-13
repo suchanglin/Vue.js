@@ -21,9 +21,9 @@
 			// 如果没指定默认匿名slot，父组件内多余的内容片断都将被抛弃
 			template:'\
 			<div class="container">\
-			<div class="header"><slot name="header"></slot></div>\
-			<div class="main"><slot></slot></div>\
-			<div class="footer"><slot name="footer"></slot></div>\
+			<div class="header"><slot name="header">1</slot></div>\
+			<div class="main"><slot>2</slot></div>\
+			<div class="footer"><slot name="footer">3</slot></div>\
 			</div>'
 		});
 
