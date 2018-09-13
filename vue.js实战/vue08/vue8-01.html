@@ -12,9 +12,9 @@
 	<script>
 		// directive自定义指令，全局注册
 		Vue.directive('focus',{
-			//inserted: 被绑定元素插入父节点时调用。（父节点存在即可调用，不必存在与document中）
-			inserted:function(el){ 
-				el.focus() //el是指令所绑定的元素，可直接操作DOM
+			//inserted: 被绑定元素插入父节点时调用。（父节点存在即可调用，不必存在于document中）
+			inserted:function(element){
+				element.focus() //element是指令所绑定的元素，可直接操作DOM
 			}
 		})
 		var app = new Vue({
