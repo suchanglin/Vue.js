@@ -17,11 +17,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 	<script>
 		Vue.component('my-component',{
-			template:'<input type="text" :value="value" @input="updateValue"/>',
 			props:['value'],
+			template:'<input type="text" :value="value" @input="updateValue"/>', // @input是自身特殊事件
 			methods:{
 				updateValue:function(event){
-					this.$emit('input',event.target.value)
+					this.$emit('input',event.target.value)  // 此处input为自定义事件，传递给自定义组件v-modelss
 				}
 			}
 		});
