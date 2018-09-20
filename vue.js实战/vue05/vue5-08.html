@@ -6,12 +6,12 @@
 </head>
 <body>
 	<div id="app">
-		<span v-for="value in user">{{value}}</span>
+		<span v-for="value in user">{{ value }}<br></span>
 		<ul>
 			<li v-for="(value,key,index) in user">{{ index }} - {{ key }} : {{ value }}</li>
 			<!-- v-for遍历对象有两个可选参数，键名和索引 -->
 		</ul>
-		<span v-for="n in 10">{{n}}</span>
+		<span v-for="n in 10">{{n}}&nbsp;&nbsp;</span>
 		<!-- v-for可以迭代整数 -->
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -20,7 +20,7 @@
 			el:'#app',
 			data:{
 				user:{
-					name:'aresn',
+					name:'Nicool',
 				    gender:'男',
 				    age:26
 				}
