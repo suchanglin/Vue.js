@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <title>菜鸟教程(runoob.com)</title>
+    <title>green bird</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </head>
-
 <body>
     <div id="blog-posts-events-demo">
-        <div :style="{ fontSize: postFontSize+'px'}">
-            <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:enlarge-text="great"></blog-post>
+        <div :style="{ fontSize: postFontSize + 'px' }">
+            <blog-post v-for="post in posts" :key="post.id" :post="post" @enlarge-text="great"></blog-post>
         </div>
     </div>
     <script type="text/javascript">
     Vue.component('blog-post', {
-        data (){
-          return {tt:'自己的数据'}
-        },
         props: ['post'],
+        data (){
+          return {
+              tt:'自己的数据'
+          }
+        },
         template: `
           <div class="blog-post">
-             <h3>{{tt}}</h3>
+            <h3>{{ tt }}</h3>
             <h3>{{ post.title }}</h3>
-            <button v-on:click="zujian">
+            <button @click="zujian">
               Enlarge text
             </button>
             <div v-html="post.content"></div>
           </div>
          `,
          methods:{
-          zujian (){this.$emit('enlarge-text')}
-         }
+          zujian () {
+              this.$emit('enlarge-text')
+          }
+        }
     })
 
     new Vue({
@@ -52,5 +54,4 @@
     })
     </script>
 </body>
-
 </html>
