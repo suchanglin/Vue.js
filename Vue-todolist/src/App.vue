@@ -34,7 +34,7 @@
       }
     },
     components: {
-      // "item-todolist": todolist
+      // "item-todolist": ItemTodolist
       ItemTodolist
     }
   }
