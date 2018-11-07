@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>first example about vuex</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex"></script>
 </head>
-
 <body>
     <div id="app">
         <p>{{ count }}</p>
@@ -31,7 +29,6 @@
         el: '#app',
         computed: {
             count() {
-
                 return store.state.count // 获取状态，只需在计算属性返回即可
             }
         },
