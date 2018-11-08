@@ -1,0 +1,88 @@
+1 引入第三方插件
+
+import echarts from 'echarts'
+
+2 引入工具类
+
+第一种是引入单个方法
+
+import {axiosfetch} from './util';
+
+下面是写法，需要export导出
+
+export function axiosfetch(options) {
+
+} 
+
+第二种  导入成组的方法
+
+import * as tools from './libs/tools'
+
+其中tools.js中有多个export方法,用 * 把tools.js里所有export的方法导出来，并赋值给tools变量，即tools替代*.
+
+
+
+vue中怎么用呢？
+
+利用原型对象，把tools所有方法赋值给对象$tools
+Vue.prototype.$tools = tools
+直接用 this.$tools.method调用就可以了
+
+
+说到这 export 和 export default 又有什么区别呢？
+
+下面看下区别
+
+ 先解释 export ：
+import {axiosfetch} from './util';  // 需要加花括号  可以一次导入一个方法，也可以一次导入多个，但都要加 花括号
+
+方法是两个或以上的类似写法
+import {axiosfetch,post} from './util'; 
+
+再解释 export default ：
+import axiosfetch from './util';  //不需要加花括号  只能一个导入，实际上default就是默认的一个变量
+
+
+
+3.导入 css文件，前面加@符号
+
+@import 'iview/dist/styles/iview.css';
+
+如果是在.vue文件中那么在外面套个style
+
+<style>
+  @import './test.css'; 
+
+</style>
+
+
+
+4.导入组件
+
+import name1 from './component/name1'
+import name2 from './component/name2'
+    components:{
+         name1,
+         name2,
+    },
+    
+    
+    
+    
+5.导入js
+
+比如你想给Arrary封一个属性，首先需要新建一个prototype.js的文件
+
+Array.prototype.max = function(){ 
+    return Math.max.apply({},this); 
+}
+
+
+然后引入
+
+import './libs/prototype'
+
+在main.js中引用那么在所有的组件都可以用
+
+[].max();
+
