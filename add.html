@@ -25,7 +25,8 @@
         },
         actions:{
             incre: ({commit}) => commit('increment'),
-            decre: ({commit}) => commit('decrement')
+            // decre: ({commit}) => commit('decrement')
+            decre: (context) => context.commit('decrement')
         }
 
     });
