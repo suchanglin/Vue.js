@@ -7,7 +7,8 @@
 <body>
 	<!-- 子组件索引 -->
 	<div id="app">
-		<button @click="handleRef">通过ref获取子组件实例</button>
+		<button @click="handleRef">点击通过ref获取子组件实例</button>
+		<div>{{message1}}</div><br>
 		<!-- 在父组件模板中，子组件标签上使用ref指定一个名称，并在父组件内通过this.$refs来访问子组件 -->
 		<component-a ref="comA"></component-a>
 	</div>
@@ -22,10 +23,13 @@
 
 		var app = new Vue({
 			el:'#app',
+			data:{
+				message1:''
+			},
 			methods:{
 				handleRef:function(){
 					// 通过$refs来访问指定实例
-					var msg = this.$refs.comA.message;
+					this.message1 = this.$refs.comA.message;
 					// console.log(this.$refs)
 					// console.log(this.$refs.comA)
 					// console.log(msg)
