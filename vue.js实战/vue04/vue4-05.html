@@ -3,10 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>vue4-05</title>
+	<style type="text/css">
+		.error{color: #0070C9;}
+	</style>
 </head>
 <body>
 	<div id="app">
-		<div :class="[isActive ? activeCls : '',errorCls]"></div>
+		<div :class="[isActive ? activeCls : '',errorCls]">类似{{}}可以使用简单的表达式</div>
 		<!-- 使用三元表达式条件切换class  这里errorCls始终会应用成error -->
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
