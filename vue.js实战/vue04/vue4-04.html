@@ -3,10 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>vue4-04</title>
+	<style type="text/css">
+		.active{width: 200px;height: 1oopx;background-color: pink;}
+		.error{color: #2D8CF0;}
+	</style>
 </head>
 <body>
 	<div id="app">
-		<div :class="[activeCls,errorCls]"></div>
+		<div :class="[activeCls,errorCls]">数组元素就是变量名，值才是类名</div>
 		<!-- 当要应用多class时，可以用数组语法 -->
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
