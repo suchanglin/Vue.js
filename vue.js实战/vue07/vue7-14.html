@@ -21,7 +21,7 @@
 			template:'<input type="text" :value="value" @input="updateValue"/>', // @input是自身特殊事件
 			methods:{
 				updateValue:function(event){
-					this.$emit('input',event.target.value)  // 此处input为自定义事件，传递给自定义组件v-modelss
+					this.$emit('input',event.target.value)  // 此处input自定义事件为了触发父组件@input，父组件v-model为语法糖
 				}
 			}
 		});
