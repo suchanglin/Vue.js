@@ -13,28 +13,34 @@
         <p>{{ count }}</p>
         <button @click="addAction">+</button>
         <button @click="increment">-</button>
+        <span>{{newq}}</span>
     </div>
     <script>
     // 唯一实例store
     const store = new Vuex.Store({
-        state: { // 一个state对象包含了所有层级
-            count: 0
+        state: { // 一个state对象包含了所有状态
+            count: 0,
+
         },
-        getters:{
+        getters: {
 
         },
         mutations: {
-            increment11 (state) {
-                state.count++
+            increment11(state) {// 当需要increment11函数的结果时候，才return回来，仅仅改变别人就省略
+               state.count++
             },
-            decrement (state) {
-                state.count--
+            decrement(state) {
+                // state.count--
+                setTimeout(
+                    function() {
+                        state.count--
+                    }, 1000)           // 把mutations改造为异步竟然也可以
             }
         },
         actions: {
-            addAction11({commit}) {
-                // commit('increment11') // 即可调用
-                setTimeout(function(){commit('increment11')},3000)  // 异步调用，3秒后执行
+            addAction11({ commit }) {
+                // commit('increment11') // 立即调用
+                setTimeout(function() { commit('increment11') }, 1000) // 异步调用，1秒后执行
             },
             // addAction11(context) {  // 参数的另一种写法
             // //     context.commit('increment11')
@@ -43,17 +49,19 @@
             // }
         }
     });
-    new Vue({
+    var vm = new Vue({
         el: '#app',
+        // store,
         computed: {
             count() {
-                return store.state.count += 10000000 // 缺少return会报错，无论加减，每次都执行
+                return store.state.count += 10 // 10为实例vm本地数据，store.state.count属vuex数据
             }
         },
         methods: {
             // ...mapMutations(['increment']),
             addAction() { store.dispatch('addAction11') }, // 必须dispatch去触发actions，再commit
-            increment() { store.commit('decrement') },   // commit去提交mutations，
+            increment() { store.commit('decrement');console.log(this) }, // commit去提交mutations，
+            // increment() { this.$store.commit('decrement'); }, // 同上一句，vm注册了store的时候，就可以这样使用了，当有子组件的时候，都可以这样使用，非常方便
             // ...mapActions(['addAction']),
             // store.dispatch('addAction')
         }
