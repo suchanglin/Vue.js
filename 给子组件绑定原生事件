@@ -1,0 +1,71 @@
+在子组件绑定原生事件一共有两种方式，一种是直接在子组件内部定义，如下面代码：
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>给子组件绑定原生事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <child></child>
+    </div>
+
+    <script>
+      // 子组件区域
+      Vue.component("child", {
+        template: "<div @click='handleChildClick'>hello vue.js</div>",
+        methods: {
+          handleChildClick() {
+            console.log("子组件内部事件被触发")
+          }
+        }
+      })
+      // 父组件区域
+      var vm = new Vue({
+        el: "#app"
+      })
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+另外一种方式就是直接在调用子组件的地方使用native关键字，如下面代码所示：
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>给子组件绑定原生事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <child @click.native="handleClick"></child>
+    </div>
+
+    <script>
+      // 子组件区域
+      Vue.component("child", {
+        template: "<div>hello vue.js</div>"
+      })
+      // 父组件区域
+      var vm = new Vue({
+        el: "#app",
+        methods: {
+          handleClick() {
+            console.log("点击事件被触发")
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+
+
