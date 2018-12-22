@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>first example about vuex</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuex"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.js"></script>
 </head>
 <body>
     <div id="app">
@@ -16,11 +16,11 @@
     </div>
     <script type="text/javascript">
     const store = new Vuex.Store({
-        state: { // 最新状态，供组件中data，也即模板view展示，数据源
+        state: {
             count: 0
         },
         mutations: {
-            increment: state => state.count++, // 组件data数据变化的本质地方，由组件methods触发
+            increment: state => state.count++,
             decrement: state => state.count--
         }
     })
@@ -29,21 +29,21 @@
         el: '#app',
         computed: {
             count() {
-                return store.state.count // 获取状态，只需在计算属性返回即可
+                return store.state.count
             }
         },
         methods: {
             increment() {
-               // console.log(this.$store === store)
-                // this.$store.commit('increment')  // 填写了store选项的时候
-                store.commit('increment') // 触发变化，只需在methods中提交mutations
+                // this.$store.commit('increment')  // 实例中有store选项的时候
+                store.commit('increment')
             },
             decrement() {
                 store.commit('decrement')
             }
         },
-        // store     // 若此处注册了store，即对象store交由实例vm代理，则可以
-        // this.$store或vm.$store取得对象store，上述提交可改为this.$store.commit('increment')
+        // store,
+        // 若此处注册了store，即对象store交由实例vm代理或this，则可以
+        // this.$store或vm.$store取得对象store
 
     })
     </script>
