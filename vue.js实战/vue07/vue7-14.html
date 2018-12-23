@@ -21,7 +21,7 @@
 			template:'<input type="text" :value="value" @input="updateValue"/>', // @input是自身特殊事件
 			methods:{
 				updateValue:function(event){
-					this.$emit('input',event.target.value)  // 此处input自定义事件为了触发父组件@input，父组件v-model为语法糖
+					this.$emit('input',event.target.value)  // 此处input自定义事件为了触发父组件@input，父组件v-model为语法糖，与子组件@input不是一回事
 				}
 			}
 		});
@@ -33,8 +33,11 @@
 			methods:{
 				handleReduce:function(){
 					this.total--
-				}
-			}
+				},
+			// 	updateValue:function(event){ // @input.native添加修饰符，原生事件，可以写在父组件内
+			// 		this.$emit('input',event.target.value)
+			// }
+		}
 		})
 	</script>
 </body>
