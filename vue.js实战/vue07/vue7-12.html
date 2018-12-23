@@ -6,7 +6,7 @@
 </head>
 <body>
     <!-- 子组件向父组件通信 -->
-    
+
     <!-- 子组件用$emit()触发事件，父组件用$on()监听子组件事件 -->
     <div id="app">
         <p>总数:{{ total }}</p>
@@ -16,7 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script>
         Vue.component('my-component',{
-            template:'<div><button @click="handleIncrease">+1</button><button @click="handleReduce">-1</button></div>',
+            template:`<div><button @click="handleIncrease">+1</button>
+                      <button @click="handleReduce">-1</button></div>`,
             data:function(){
                 return { counter:0 }
             },
