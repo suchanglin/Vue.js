@@ -10,20 +10,18 @@
 	<div id="app">{{date|filt}}</div>
 
 	<script>
-		Vue.filter('filt',function(value){
-        return moment(value).format('YYYY-MM-DD HH:mm:ss')
-		});
+		Vue.filter('filt',value => moment(value).format('YYYY-MM-DD HH:mm:ss'));
 		var app = new Vue({
 			el:'#app',
 			data:{
 				date:new Date()
 			},
-			mounted:function(){
+			mounted (){
 				this.timer = setInterval(() =>{
 					this.date = new Date()
 				},1000)
 			},
-			beforeDestroy:function(){ //实例销毁前调用
+			beforeDestroy (){ //实例销毁前调用
 				if(this.timer){
 					clearInterval(this.timer)
 				}
