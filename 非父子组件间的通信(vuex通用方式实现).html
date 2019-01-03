@@ -13,7 +13,7 @@
         <h3>非父子组件间的通信(vuex通用方式实现)</h3>
         <p>{{ count }}</p>
         <my-addbtn></my-addbtn>
-        <my-remove></my-remove>
+        <my-remove @click.native="setCount"></my-remove>
     </div>
     <script>
     const store = new Vuex.Store({
@@ -22,14 +22,14 @@
         },
         mutations: {
             add: state => state.count++,
-            removeit: state => state.count--
+            remove: state => state.count--
         },
         actions: {
-            addAction({commit}) {   // 参数是对象
+            addAction({commit}) {   // 参数是对象,{commit,state,dispatch}
                 commit('add')
             },
-            remove(context) {   // 参数的另一种写法
-                context.commit('removeit')
+            remove(context) {   // 参数的另一种写法,rootContext
+                context.commit('remove')
             }
         }
     });
@@ -38,17 +38,19 @@
         template: '<button @click="setCount">+</button>',
         methods: {
             setCount: function() {
-                store.dispatch('addAction');  // dispatch触发
+                // store.dispatch('addAction');  // dispatch触发
+                this.$store.dispatch('addAction'); 
             }
         }
     };
     var M2 = {
-        template: '<button @click="setCount">-</button>',
-        methods: {
-            setCount: function() {
-                store.dispatch('remove');
-            }
-        }
+        template: '<button>-</button>',
+        // methods: {
+        //     setCount () {
+        //         // store.dispatch('remove');
+        //         this.$store.dispatch('remove');
+        //     }
+        // }
     };
 
     var vm = new Vue({
@@ -58,7 +60,13 @@
                 return store.state.count  // 虽然count属于父组件，但vuex无需props传值
             }
         },
-
+         methods: {
+            setCount () {
+                // store.dispatch('remove');  // store是全局实例变量，依然生效
+                this.$store.dispatch('remove');
+            }
+        },
+        store, // 注册到实例中来，以便每个子组件可以通过this.$store.xx获取dispatch,commit等方法
         components: {
             // 'my-addbtn': M1,  // 这种写法必须为字符串，非驼峰式
             // 'my-remove': M2
