@@ -121,7 +121,7 @@
         <!-- 循环输出数据 -->
 
         <li v-for="article in filteredArticles">
-            <a v-bind:href="article.url"><img v-bind:src="article.image" /></a>
+            <a :href="article.url"><img :src="article.image" /></a>
             <p>{{article.title}}</p>
         </li>
     </ul>
@@ -186,7 +186,7 @@ var demo = new Vue({
                     return item;
                 }
             })
-
+            console.log(articles_array)
             // 返回过来后的数组
             return articles_array;
         }
