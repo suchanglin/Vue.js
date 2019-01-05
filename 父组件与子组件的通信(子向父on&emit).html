@@ -3,6 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>vuee模板</title>
+    <style type="text/css">
+        p{background-color: black;color: white;display: inline;margin: 50% 0 0 50%;}
+        .nice{margin: 0 0 0 50%;width: 200px;}
+        button{font-weight: bold}
+    </style>
 </head>
 <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
 <body>
@@ -16,7 +21,7 @@
     <script>
     Vue.component('MyComp', {
         template: `
-        <div>
+        <div class="nice">
           <button @click="handlecrease">+1</button>
           <button @click="handlereduce">-1</button>
         </div>
