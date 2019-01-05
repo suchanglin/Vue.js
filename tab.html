@@ -37,12 +37,12 @@
     <div id="dynamic-component-demo" class="demo">
         <button
         v-for="tab in tabs"
-        v-bind:key="tab"
-        v-bind:class="['tab-button', { active: currentTab === tab }]"
-        v-on:click="currentTab=tab">{{ tab }}</button>
+        :key="tab"
+        :class="['tab-button', { active: currentTab === tab }]"
+        @click="currentTab=tab">{{ tab }}</button>
         <!-- 'Home', 'Posts', 'Archive' 这个click参数赋值也是一个难点,
         v-on:click="currentTab=tab"可以改写为v-on:click="changtab(tab)"-->
-        <component v-bind:is="currentTabComponent" class="tab"></component>
+        <component :is="currentTabComponent" class="tab"></component>
     </div>
     <script type="text/javascript">
     Vue.component('tab-home', {
@@ -62,7 +62,7 @@
             tabs: ['Home', 'Posts', 'Archive'] // 罗列出来三个按钮
         },
         computed: {
-            currentTabComponent: function() { // 由data默认按钮选择默认的tab-home组件
+            currentTabComponent () { // 由data默认按钮选择默认的tab-home组件
                 return 'tab-' + this.currentTab.toLowerCase() // tab-home  tab-posts tab-archive
             }
         },
