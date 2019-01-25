@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="dialog-wrap">
-      <div class="dialog-cover"  v-if="isShow" @click="closeMyself"></div>
+      <div class="dialog-cover"  v-if="isShow" @click="closeMyself"></div>  <!-- 点击对话框之外也可以关闭 -->
       <transition name="drop">
         <div class="dialog-content"  v-if="isShow">
           <p class="dialog-close" @click="closeMyself">x</p>

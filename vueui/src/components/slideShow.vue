@@ -5,7 +5,7 @@
         <transition name="slide-trans">
           <img v-if="isShow" :src="slides[nowIndex].src">
         </transition>
-        <transition name="slide-trans-old">
+        <transition name="slide-trans-old">            <!-- 处理突然出现空白的瞬间 -->
           <img v-if="!isShow" :src="slides[nowIndex].src">
         </transition>
       </a>

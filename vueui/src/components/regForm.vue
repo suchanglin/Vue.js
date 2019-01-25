@@ -24,44 +24,52 @@ export default {
   },
   data () {
     return {
-      
+      formData:[
+      {label:'唐三藏'},
+      {label:'孙悟空'},
+      {label:'猪八戒'},
+      {label:'沙悟净'}
+      ]
     }
   },
-  computed: {
-    userErrors () {
-      let status, errorText
-      if (!/@/g.test(this.usernameModel)) {
-        status = false
-        errorText = '必须包含@'
-      }
-      else {
-        status = true
-        errorText = ''
-      }
-      return {
-        status,
-        errorText
-      }
-    },
-    passwordErrors () {
-      let status, errorText
-      if (!/@/g.test(this.usernameModel)) {
-        status = false
-        errorText = '必须包含@'
-      }
-      else {
-        status = true
-        errorText = ''
-      }
-      return {
-        status,
-        errorText
-      }
-    }
-  },
+  // computed: {
+  //   userErrors () {
+  //     let status, errorText
+  //     if (!/@/g.test(this.usernameModel)) {
+  //       status = false
+  //       errorText = '必须包含@'
+  //     }
+  //     else {
+  //       status = true
+  //       errorText = ''
+  //     }
+  //     return {
+  //       status,
+  //       errorText
+  //     }
+  //   },
+  //   passwordErrors () {
+  //     let status, errorText
+  //     if (!/@/g.test(this.usernameModel)) {
+  //       status = false
+  //       errorText = '必须包含@'
+  //     }
+  //     else {
+  //       status = true
+  //       errorText = ''
+  //     }
+  //     return {
+  //       status,
+  //       errorText
+  //     }
+  //   }
+  // },
   methods: {
     closeMyself () {
       this.$emit('on-close')
+    },
+    onLogin () {
+      console.log('结构当中有处理函数，methods必须有这个方法，不然报错')
     }
   }
 }

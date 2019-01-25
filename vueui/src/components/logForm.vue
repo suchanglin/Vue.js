@@ -41,7 +41,7 @@ export default {
       let errorText, status
       if (!/@/g.test(this.usernameModel)) {
         status = false
-        errorText = '不包含@'
+        errorText = '邮箱需包含@'
       }
       else {
         status = true

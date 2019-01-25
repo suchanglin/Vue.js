@@ -2,21 +2,21 @@
   <div class="index-wrap">
     <div class="index-left">
       <div class="index-left-block">
-        <h2>全部产品</h2>
+        <h2>全部产品</h2>  <!-- 静态数据 -->
         
         <template v-for="product in productList">
           <h3>{{ product.title}}</h3>
           <ul>
             <li v-for="item in product.list">
-              <a :href="item.url">{{ item.name }}</a>
-              <span v-if="item.hot" class="hot-tag">HOT</span>
+              <a :href="item.url" target="_blank">{{ item.name }}</a>
+              <span v-if="item.hot" class="hot-tag"></span>
             </li>
           </ul>
           <div v-if="!product.last" class="hr"></div>
         </template>
       </div>
       <div class="index-left-block lastest-news">
-        <h2>最新消息</h2>
+        <h2>最新消息</h2>  <!-- 服务器获取数据 -->
         <ul>
           <li v-for="item in newsList">
             <a :href="item.url" class="new-item">{{ item.title }}</a>
@@ -64,22 +64,22 @@ export default {
       slides: [
         {
           src: require('../assets/slideShow/pic1.jpg'),
-          title: 'xxx1',
+          title: '第1张',
           href: 'detail/analysis'
         },
         {
           src: require('../assets/slideShow/pic2.jpg'),
-          title: 'xxx2',
+          title: '第2张',
           href: 'detail/count'
         },
         {
           src: require('../assets/slideShow/pic3.jpg'),
-          title: 'xxx3',
-          href: 'http://xxx.xxx.com'
+          title: '第3张',
+          href: 'http://www.baidu.com'
         },
         {
           src: require('../assets/slideShow/pic4.jpg'),
-          title: 'xxx4',
+          title: '第4张',
           href: 'detail/forecast'
         }
       ],
@@ -120,20 +120,20 @@ export default {
           list: [
             {
               name: '数据统计',
-              url: 'http://starcraft.com'
+              url: 'https://cn.vuejs.org/v2/guide/'
             },
             {
               name: '数据预测',
-              url: 'http://warcraft.com'
+              url: 'https://cn.vuejs.org/v2/guide/'
             },
             {
               name: '流量分析',
-              url: 'http://overwatch.com',
+              url: 'https://cn.vuejs.org/v2/guide/',
               hot: true
             },
             {
               name: '广告发布',
-              url: 'http://hearstone.com'
+              url: 'https://cn.vuejs.org/v2/guide/'
             }
           ]
         },
@@ -143,20 +143,20 @@ export default {
           list: [
             {
               name: '91助手',
-              url: 'http://weixin.com'
+              url: 'https://cn.vuejs.org/v2/guide/'
             },
             {
               name: '产品助手',
-              url: 'http://twitter.com',
+              url: 'https://cn.vuejs.org/v2/guide/',
               hot: true
             },
             {
               name: '智能地图',
-              url: 'http://maps.com'
+              url: 'https://cn.vuejs.org/v2/guide/'
             },
             {
               name: '团队语音',
-              url: 'http://phone.com'
+              url: 'https://cn.vuejs.org/v2/guide/'
             }
           ]
         }
