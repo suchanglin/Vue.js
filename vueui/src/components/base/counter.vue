@@ -27,7 +27,7 @@ export default {
   },
   watch: {
     number () {
-      this.$emit('on-change', this.number)
+      // this.$emit('on-change', this.number)
     }
   },
   methods: {
