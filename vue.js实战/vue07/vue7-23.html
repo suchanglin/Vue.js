@@ -20,7 +20,7 @@
 				}
 			},
 			// 必须给个条件限制递归数量，否则会抛出错误
-			template:'<div class="child"><child-component :count="count+1" v-if="count<6"></child-component></div>'
+			template:'<div class="child">1<child-component :count="count+1" v-if="count<6">2</child-component></div>'
 		})
 
 		var app = new Vue({
