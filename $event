@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>vuee模板</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.6/vue.js"></script>
+</head>
+
+<body>
+    <div id="blog-posts-events-demo">
+        <div :style="{fontSize:postFontSize+'em'}">
+            <blog-post
+            v-for="post in posts"
+            :key="post.id"
+            :post="post"
+            @enlarge-text="text">
+            </blog-post>  <!-- "text"或者text($event)都可以   直接表达式也可以postFontSize += $event，就不需要父实例的methods了-->
+        </div>
+    </div>
+    <script>
+    Vue.component('blog-post', {
+        props: ['post'],
+        template: `
+                <div class="blog-post">
+                  <h3>{{ post.title }}</h3>
+                  <button  v-on:click="$emit('enlarge-text',0.1)">
+                    Enlarge text
+                  </button>
+                </div>
+              `
+    });
+    new Vue({
+        el: '#blog-posts-events-demo',
+        data: {
+            posts: [
+            { id: 1, title: 'My journey with Vue' },
+            { id: 2, title: 'Blogging with Vue' },
+            { id: 3, title: 'Why Vue is so fun' }],
+            postFontSize: 1
+        },
+        methods:{
+          text(size) {
+            console.log(size)
+            this.postFontSize += size
+          } // HTML模板中可以直接通过 $event 访问到被抛出的这个值，$event是原生
+        }
+    })
+    </script>
+</body>
+
+</html>
