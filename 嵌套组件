@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>嵌套组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-app></my-app>
+    </div>
+    </script>
+    <script src="https://cdn.bootcss.com/vue/2.6.6/vue.js"></script>
+    <script type="text/javascript">
+    var MyHeader = {
+        props: ['header'],
+        template: '<div>{{header}}</div>'
+    };
+
+    var MyApp = {
+        template: `<div><my-header :header="'这个注意属性必须带冒号'"></my-header></div>`,
+        components: { MyHeader }
+    };
+
+    new Vue({
+        el: '#app',
+        components: {
+            MyApp
+        }
+    });
+    </script>
+</body>
+
+</html>
