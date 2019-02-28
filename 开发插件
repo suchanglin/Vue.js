@@ -1,0 +1,74 @@
+MyPlugin.install = function (Vue, options) {
+  // 1. 添加全局方法或属性
+  Vue.myGlobalMethod = function () {
+    // 逻辑...
+  }
+
+  // 2. 添加全局资源
+  Vue.directive('my-directive', {
+    bind (el, binding, vnode, oldVnode) {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 3. 注入组件
+  Vue.mixin({
+    created: function () {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 4. 添加实例方法
+  Vue.prototype.$myMethod = function (methodOptions) {
+    // 逻辑...
+  }
+}
+
+
+我们知道，Vue.use()可以让我们安装一个自定义的Vue插件。为此，我们需要声明一个install函数
+---------------------------------------------------------------------------------------------------------------
+
+
+
+// 创建一个简单的插件 say.js
+var install = function(Vue) {
+  if (install.installed) return // 如果已经注册过了，就跳过
+  install.installed = true
+
+  Object.defineProperties(Vue.prototype, {
+    $say: {
+      value: function() {console.log('I am a plugin')}
+    }
+  })
+}
+module.exports = install
+
+然后我们要注册这个组件
+import say from './say.js'
+import Vue from 'vue'
+
+Vue.use(say)
+
+这样，在每个Vue的实例里我们都能调用say方法了。
+
+我们来看Vue.use方法内部是怎么实现的
+
+Vue.use = function (plugin) {
+  if (plugin.installed) {
+    return;
+  }
+  // additional parameters
+  var args = toArray(arguments, 1);
+  args.unshift(this);
+  if (typeof plugin.install === 'function') {
+    plugin.install.apply(plugin, args);
+  } else {
+    plugin.apply(null, args);
+  }
+  plugin.installed = true;
+  return this;
+};
+
+其实也就是调用了这个install方法而已。
