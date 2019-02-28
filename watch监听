@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>watch监听</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.6/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="childrens.name" />
+        <input type="text" v-model="lastName" />
+    </div>
+    <script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            childrens: {
+                name: '小强',
+                age: 20,
+                sex: '男'
+            },
+            tdArray: ["1", "2"],
+            lastName: "张三"
+        },
+        watch: {
+            childrens: {
+                handler: function(val, oldval) {
+                    console.log(val.name)
+                },
+                deep: true //对象内部的属性监听，也叫深度监听
+            },
+            'childrens.name': function(val, oldval) {
+                console.log(val + "aaa")
+            }, //键路径必须加上引号
+            lastName: function(val, oldval) {
+                console.log(this.lastName)
+            }
+        }, //以V-model绑定数据时使用的数据变化监测
+    });
+    vm.$watch("lastName", function(val, oldval) {
+        console.log(val)
+    }) //主动调用$watch方法来进行数据监测
+    </script>
+</body>
+</body>
+
+</html>
