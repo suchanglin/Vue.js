@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="https://cdn.bootcss.com/vue/2.5.6/vue.js"></script>
+    <style type="text/css">
+    .toggleClassWrap .clicked {
+        color: red;
+    }
+    </style>
+</head>
+<body>
+    <div class="toggleClassWrap">
+        <ul>
+            <li @click="change(index)" 
+                v-for="(item, index) in desc" 
+                :class="{clicked: index === currentIndex}" 
+                :key="index">
+                <a href="javascript:;">{{item.ctrlValue}}</a>
+            </li>
+        </ul>
+    </div>
+    <script>
+    var app = new Vue({
+        el: ".toggleClassWrap",
+        data: {
+            desc: [{
+                ctrlValue: "test1"
+            }, {
+                ctrlValue: "test2"
+            }, {
+                ctrlValue: "test3"
+            }, {
+                ctrlValue: "test4"
+            }],
+            currentIndex: 0
+        },
+        methods: {
+        	change (index) {
+               this.currentIndex = index
+             //  console.log(this.currentIndex)   // 获取不到更新值，抛出错误
+                this.$nextTick(function(){
+        		    console.log(this.currentIndex)
+                })
+        	}
+        }
+    })
+    </script>
+</body>
+
+</html>
