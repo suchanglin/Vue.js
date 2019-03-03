@@ -43,7 +43,7 @@
         methods: {
             change(index) {
                 this.currentIndex = index
-                this.$nextTick(function() {
+                this.$nextTick(function() {  // DOM操作放在$nextTick（）方法内
                     console.log(this.currentIndex)
                 })
             }
