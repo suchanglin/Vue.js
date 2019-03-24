@@ -9,19 +9,19 @@
 
 <body>
     <div id="app" class="demo">
-        <p v-for="msg in lists">{{ msg }}</p>
         <button-message @custom="handleMessage"></button-message>
+        <p v-for="msg in lists">{{ msg }}</p>
     </div>
     <script>
 
         var ButtonMessage = {
             template: `<div>
-                        <input type="text" v-model="message"/>
+                        <input type="text" v-model="message" placeholder="请输入信息"/>
                         <button @click="handleSendMessage">Send</button>
                        </div>`,
             data() {
                 return {
-                    message: 'test message'
+                    message: ''
                 }
             },
             methods: {
