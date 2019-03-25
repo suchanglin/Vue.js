@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,46 +7,52 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
-
 <body>
     <div id="app">
         <h1>Hello App!</h1>
         <p>
-            <router-link to="/foo">Go to Foo</router-link>
-            <router-link to="/bar">Go to Bar</router-link>
+            <router-link to="/user/foo">Go to Foo</router-link>
+            <router-link to="/user/bar">Go to Bar</router-link>
         </p>
         <router-view></router-view>
     </div>
     <script type="text/javascript">
-    const Foo = Vue.extend({ template: '<div>foo</div>' })
-    const Home = Vue.extend({ template:'<div>没有点击link时，默认的页面</div>'})
-    const Bar = {
-        template: '<div @click="luyou">bar</div>',
+    // const User = { template: '<div>User {{ $route.params.id }}</div>' }
+    const User = {
+        template: '<div @click="print">User {{ $route.params.id }}</div>',
+        beforeRouteUpdate(to, from, next) {
+            console.log(to)
+            console.log(from)
+            console.log(next)
+            next(vm => { console.log(vm) })
+        },
         methods: {
-            luyou() {
+            print() {
                 console.log(this.$route)
+                console.log(this.$router.currentRoute)
             }
         }
     }
+    // const Foo = { template: '<div>foo</div>' }
+    // const Bar = { template: '<div>bar</div>' }
 
-    const routeses = [{path:'',component:Home},
-        { path: '/foo', component: Foo },
-        { path: '/bar', component: Bar }
-    ]
-
-    const router11 = new VueRouter({
-        routes: routeses
+    // const routes = [
+    //     { path: '/foo', component: Foo },
+    //     { path: '/bar', component: Bar }
+    // ]
+    const router = new VueRouter({
+        routes: [
+            // 动态路径参数 以冒号开头
+            { path: '/user/:id', component: User }
+        ]
     })
+    // const router = new VueRouter({
+    //     routes
+    // })
 
     const app = new Vue({
-        el: '#app',
-        router: router11,
-        mounted() {
-            // this.$router.push('/')
-            console.log(this.$router)
-            console.log(this.$route)
-        }
-    })
+        router
+    }).$mount('#app')
     </script>
 </body>
 
