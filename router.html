@@ -11,22 +11,34 @@
     <div id="app">
         <h1>Hello App!</h1>
         <p>
+<<<<<<< HEAD
          <router-link to="/foo">Go to Foo</router-link>
          <router-link to="/bar">Go to Bar</router-link>
+=======
+            <router-link to="/user/foo">Go to Foo</router-link>
+            <router-link to="/user/bar">Go to Bar</router-link>
+>>>>>>> 1feb5a17c71d919e3e0393e89c66dab366ec6faf
         </p>
         <router-view></router-view>
     </div>
     <script type="text/javascript">
-    const Foo = Vue.extend({ template: '<div>foo</div>' })
-    const Home = Vue.extend({ template:'<div>没有点击link时，默认的页面</div>'})
-    const Bar = {
-        template: '<div @click="luyou">bar</div>',
+    // const User = { template: '<div>User {{ $route.params.id }}</div>' }
+    const User = {
+        template: '<div @click="print">User {{ $route.params.id }}</div>',
+        beforeRouteUpdate(to, from, next) {
+            console.log(to)
+            console.log(from)
+            console.log(next)
+            next(vm => { console.log(vm) })
+        },
         methods: {
-            luyou() {
+            print() {
                 console.log(this.$route)
+                console.log(this.$router.currentRoute)
             }
         }
     }
+<<<<<<< HEAD
     const routeses = [{path:'',component:Home},
         { path: '/foo', component: Foo },
         { path: '/bar', component: Bar }
@@ -43,7 +55,33 @@
             console.log(this.$route)
         }
     })
+=======
+    // const Foo = { template: '<div>foo</div>' }
+    // const Bar = { template: '<div>bar</div>' }
+
+    // const routes = [
+    //     { path: '/foo', component: Foo },
+    //     { path: '/bar', component: Bar }
+    // ]
+    const router = new VueRouter({
+        routes: [
+            // 动态路径参数 以冒号开头
+            { path: '/user/:id', component: User }
+        ]
+    })
+    // const router = new VueRouter({
+    //     routes
+    // })
+
+    const app = new Vue({
+        router
+    }).$mount('#app')
+>>>>>>> 1feb5a17c71d919e3e0393e89c66dab366ec6faf
     </script>
 </body>
 </html>
 
+<<<<<<< HEAD
+=======
+</html>
+>>>>>>> 1feb5a17c71d919e3e0393e89c66dab366ec6faf
