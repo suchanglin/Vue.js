@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编程式导航</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.9/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.js"></script>
+    <style>
+        button,
+        .router-link{
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            color: #fff;
+            /*background: linear-gradient(to right, blue, red, green);*/
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--最初的 router-link 模式-->
+        <router-link class="router-link" to="/path/RouterLink">原始路由</router-link>
+        <!--使用 router.push 方法-->
+        <button type="button" onclick="routerPush()">router.push 方法</button>
+        <!--使用 router.replace 方法-->
+        <button type="button" onclick="routerReplace()">router.replace 方法</button>
+        <!--使用 router.go 方法-->
+        <button type="button" onclick="routerGo()">router.go 方法</button>
+        <router-view></router-view>
+    </div>
+    <script>
+    /**
+     *    创建一个路由组件  用于输出内容 
+     */
+    const view = {
+        template: "<div>" +
+            "<h1>我点击的是  {{$route.params.msg}}</h1>" +
+            "</div>"
+    }
+
+    /**
+     *    定义路由
+     */
+    const routes = [{
+        path: '/path/:msg',
+        component: view
+    }]
+
+    /**
+     *    创建路由实例
+     */
+    const router = new VueRouter({
+        routes
+    })
+
+    const app = new Vue({
+        router
+    }).$mount("#app")
+
+    /**
+     *    使用 router.push 替换 <router-link to="xxx"></router-link> 
+     *    可点击浏览器后退按钮后退至上一步
+     */
+    function routerPush() {
+        router.push({
+            path: "/path/routerPush"
+        })
+    }
+
+    /**
+     *    使用 router.replace 替换 <router-link to="xxx"></router-link>
+     *    不可后退
+     */
+    function routerReplace() {
+        router.replace({
+            path: "/path/routerReplace"
+        })
+    }
+
+    /**
+     *    router.go(n),接收一个整数，如果为正数则 前进 n 步，负则后退 n 步
+     */
+    function routerGo() {
+        router.go(-1)
+    }
+    </script>
+</body>
+</html>
