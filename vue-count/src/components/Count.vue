@@ -11,18 +11,18 @@
 </template>
 
 <script>
-// import store from '../store/store'  // 因为在跟组件即mai中注册了，所有子组件都可以使用
+// import store from '../store/store'  // 因为在根组件即main中注册了，所有子组件都可以使用
 import {mapMutations, mapActions} from 'vuex'
 
 export default {
   name: 'Count',
   data () {
     return {
-      msg: 'Welcome to guangzhou!'
+      msg: 'Welcome to Guangzhou!'
     }
   },
   methods: {
-    ...mapMutations(['add', 'reduce']),
+    // ...mapMutations(['add', 'reduce']),
     ...mapActions(['addAction', 'reduceAction'])
   }
 }
