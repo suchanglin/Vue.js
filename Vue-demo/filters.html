@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>明灯小站</title>
-<script src="http://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <meta charset="utf-8">
+    <title>明灯小站</title>
+    <script src="http://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 </head>
 <body>
-<div id="app">
-    <h2>{{name | touppercase | myfilter}}</h2>
-</div>
-
-<script>
-new Vue({
-    el: "#app",
-    data: {
-        name: "myapp"
-    },
-    filters: {
-        myfilter(value) 
-            return value.split('').reverse().join('');
+    <div id="app">
+        <h2>{{name | touppercase | myfilter}}</h2>
+    </div>
+    <script>
+    new Vue({
+        el: "#app",
+        data: {
+            name: "myapp"
         },
-        touppercase(value) 
-            return value.toUpperCase();
-        }
-    }
-})
-</script>
-</body>
-</html>
+        filters: {
+            myfilter(value) {
+                return value.split('').reverse().join('');
 
-//  先计算touppercase再计算myfilter
+            },
+            touppercase(value) {
+                console.log(value.toUpperCase())
+                return value.toUpperCase();
+            }
+
+        }
+    })
+    </script>
+</body>
+
+</html>
