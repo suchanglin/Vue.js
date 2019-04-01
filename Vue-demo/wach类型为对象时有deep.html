@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>明灯小站</title>
+    <script src="http://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="fruits.count" />
+        <input type="text" v-model="fruits.name" />
+        <p>fruits：{{message}}</p>
+    </div>
+    <script>
+    new Vue({
+        el: '#app',
+        data: {
+            fruits: {
+                name: "香蕉",
+                count: 5
+            },
+            message: '5条香蕉'
+        },
+        watch: {
+            fruits: {
+                handler(obj) {
+                    this.message = obj.count + '条' + obj.name
+                },
+                deep: true
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
