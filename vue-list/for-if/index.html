@@ -6,6 +6,7 @@
 </head>
 <body>
     <div id="app">
+        <button @click="toggleOk">toggle</button>
         <p v-if="ok">ok</p>
         <p v-if="!ok">not ok</p>
         <ul v-if="ok">
@@ -13,7 +14,6 @@
                 {{item.label}}
             </li>
         </ul>
-        <button @click="toggleOk">toggle</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script type="text/javascript">
