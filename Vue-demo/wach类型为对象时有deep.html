@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>明灯小站</title>
+    <title>深度监听</title>
     <script src="http://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 </head>
 <body>
@@ -24,6 +24,7 @@
         watch: {
             fruits: {
                 handler(obj) {
+                    console.log(obj)
                     this.message = obj.count + '条' + obj.name
                 },
                 deep: true
