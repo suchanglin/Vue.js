@@ -3,12 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>vue3-01</title>
+	<style type="text/css">
+		[v-cloak]{display: none;} /*防闪动*/
+	</style>
 </head>
 <body>
-	<div id="app">
-		{{ reversedText }}
+	<div id="app" v-cloak>
+		{{ reversedText1 }}<p>{{reversedText2()}}</p>
 	</div>
-
+  
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 	<script>
 		var app = new Vue({
@@ -16,8 +19,13 @@
 			data:{
 				text:'123,456'
 			},
+			methods:{
+				reversedText2:function(){
+					return this.text.split(',').reverse().join(',')
+				}
+			},
 			computed:{ //所有计算属性都以函数形式写在computed选项内
-				reversedText:function(){
+				reversedText1:function(){
 					return this.text.split(',').reverse().join(',')
 				}
 			}

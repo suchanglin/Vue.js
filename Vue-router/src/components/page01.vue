@@ -2,7 +2,7 @@
   <div>
     <h2 class="text-center">{{title}}</h2>
     <ul class="text-center spacing" style="padding: 0">
-      <li v-for="item in links"><a @click="$goRoute(item.route)">{{item.text}}</a></li>
+      <li v-for="item in links"><a @click="go(item)">{{item.text}}</a></li>
     </ul>
     <router-view></router-view>
   </div>
@@ -24,6 +24,12 @@ export default {
           route: '/page01/page01-b'
         }
       ]
+    }
+  },
+  methods: {
+    go (item) {
+      this.$goRoute(item.route)
+      console.log(this.$route.path)
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2 class="text-center">{{title}}</h2>
+    <p>就一个题目，啥也没有</p>
   </div>
 </template>
 
@@ -15,3 +16,9 @@
     components: {}
   }
 </script>
+
+<style scoped>
+  p{
+    text-align: center;
+  }
+</style>
