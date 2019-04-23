@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <free-tree @select="onselect" :alldata="mydata" class="trees"></free-tree>
+    </div>
+    <script>
+    var freeTreeList = {
+        template: `
+  <li>
+     <span @click="toggle(model.id)">
+         <i v-if="isFolder" class="icon" :class="[open ? 'folder-open': 'folder']"></i>
+         <i v-if="!isFolder" class="icon file-text"></i>
+         {{ model.menuName }}
+     </span>
+    <ul style="padding-left: 16px" :class="{slideDown:!open,slideUp:open}" v-show="open" v-if="isFolder">
+      <free-tree-list @select="onselect" v-for="item in model.children" :model="item" :key="item.id"></free-tree-list>
+    </ul>
+  </li>`,
+        name: 'free-tree-list', // 递归组件，name属性不能少
+        props: ['model'],
+        data() {
+            return {
+                open: false
+            }
+        },
+        computed: {
+            isFolder: function() {
+                return this.model.children && this.model.children.length
+            }
+        },
+        methods: {
+            toggle: function(id) {
+                this.$emit('select', id)
+                if (this.isFolder) {
+                    this.open = !this.open
+                }
+            },
+            onselect(id) {
+                this.$emit('select', id);
+            }
+        }
+    };
+
+
+
+    var freeTree = {
+        props: {
+            alldata: {
+                type: Array,
+                // default: []
+            }
+        },
+        data() {
+            return {
+
+            }
+        },
+        template: `
+  <div class="tree-menu">
+    <ul v-for="menuItem in alldata" :key="menuItem.id">
+      <free-tree-list @select="onselect" :model="menuItem"></free-tree-list>
+    </ul>
+  </div>`,
+
+        components: {
+            freeTreeList
+        },
+        methods: {
+            onselect(id) {
+                this.$emit('select', id);
+            }
+        }
+    };
+
+    var mydata = [{
+            'id': '1',
+            'menuName': '一级-01',
+            'menuCode': '10',
+            'children': [{
+                    'menuName': '二级-01',
+                    'menuCode': '11',
+                    'id': '11'
+                },
+                {
+                    'menuName': '二级-02',
+                    'menuCode': '12',
+                    'id': '12',
+                    'children': [{
+                            'menuName': '三级-02',
+                            'menuCode': '121',
+                            'id': '121'
+                        },
+                        {
+                            'menuName': '三级-03',
+                            'menuCode': '122',
+                            'id': '122'
+                        }
+                    ]
+                },
+                {
+                    'menuName': '二级-03',
+                    'menuCode': '13',
+                    'id': '13'
+                }
+            ]
+        },
+        {
+            'id': '2',
+            'menuName': '一级-02',
+            'menuCode': ''
+        },
+        {
+            'id': '3',
+            'menuName': '一级-03',
+            'menuCode': '30',
+            'children': [{
+                    'menuName': '二级-01',
+                    'menuCode': '31',
+                    'id': '31'
+                },
+                {
+                    'menuName': '二级-02',
+                    'menuCode': '32',
+                    'id': '32',
+                    'children': []
+                }
+            ]
+        },
+        {
+            'id': '4',
+            'menuName': '一级-04',
+            'menuCode': '',
+            'children': []
+        }
+    ];
+
+    new Vue({
+        el: '#app',
+        data: {
+            mydata: mydata
+        },
+        methods: {
+            onselect(id) {
+                console.log(id);
+            }
+        },
+        components: {
+            freeTree
+        }
+    })
+    </script>
+</body>
+
+</html>
