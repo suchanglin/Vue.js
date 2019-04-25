@@ -8,7 +8,7 @@
 
 这个时候，我们就需要用到我们的状态管理工具 Vuex 了。Vuex 是一个专门为 Vue.js 框架设计的、专门用来对于 Vue.js 应用进行状态管理的库。它借鉴了 Flux、redux 的基本思想，将状态抽离到全局，形成一个 Store。因为 Vuex 内部采用了 new Vue 来将 Store 内的数据进行「响应式化」，所以 Vuex 是一款利用 Vue 内部机制的库，与 Vue 高度契合，与 Vue 搭配使用显得更加简单高效，但缺点是不能与其他的框架（如 react）配合使用。
 
-本节将简单介绍 Vuex 最核心的内部机制，起个抛砖引玉的作用，想了解更多细节可以参考笔者 [Github](https://github.com/answershuto) 上的另一篇文章 [《Vuex源码解析》](https://github.com/answershuto/learnVue/blob/master/docs/Vuex%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.MarkDown)或者直接阅读 [Vuex源码](https://github.com/vuejs/vuex)。
+本节将简单介绍 Vuex 最核心的内部机制，起个抛砖引玉的作用。
 
 ## 安装
 
@@ -154,6 +154,3 @@ dispatch (type, payload) {
 
 理解 Vuex 的核心在于理解其如何与 Vue 本身结合，如何利用 Vue 的响应式机制来实现核心 Store 的「响应式化」。
 
-Vuex 本身代码不多且设计优雅，非常值得一读，想阅读源码的同学请看[Vuex源码](https://github.com/vuejs/vuex)。
-
-注：本节代码参考[《Vuex状态管理的工作原理》](https://github.com/answershuto/VueDemo/blob/master/%E3%80%8AVuex%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E3%80%8B.js)。
