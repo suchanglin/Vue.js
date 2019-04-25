@@ -14,6 +14,7 @@
 		Vue.directive('focus',{
 			//inserted: 被绑定元素插入父节点时调用。（父节点存在即可调用，不必存在于document中）
 			inserted:function(element){
+				console.log(element)
 				element.focus() //element是指令所绑定的元素，可直接操作DOM
 			}
 		})
