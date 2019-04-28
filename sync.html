@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>.sync的用法</title>
+    <style type="text/css">
+    .hello {
+        padding: 30px 20px 30px 5px;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <child :show.sync='valueChild'></child>
+        <!-- <child :show='valueChild' @update:show="update"></child> -->
+        <button @click="changeValue">toggle</button>
+    </div>
+    <script type="text/javascript">
+    var child = {
+        props: ['show'],
+        template: `<div v-if="show" class="hello">
+                    <p>默认初始值是{{show}}，所以是显示的</p>
+                    <button @click.stop="closeDiv">关闭</button>
+                 </div>`,
+        methods: {
+            closeDiv() {
+                //上面注释部分@update:show被.sync隐藏掉了，但子组件仍需要显式触发
+                this.$emit('update:show', false);
+            }
+        }
+    }
+    var vm = new Vue({
+        el: "#demo",
+        data: {
+            valueChild: true,
+        },
+        components: {
+            child
+        },
+        methods: {
+            changeValue() {
+                this.valueChild = !this.valueChild
+            },
+            // update(val) {
+            //     this.valueChild = val
+            // }
+        }
+    })
+    </script>
+</body>
+</html>
