@@ -7,76 +7,83 @@
     <link rel="stylesheet" href="">
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 </head>
-<body>
-	<div id="app">	
-       <aa></aa>
-	</div>
-    <script type="text/javascript">
-   Vue.component('cc', {
-    template: `
-		 <div>
-		    <input type="text" v-model="$attrs.messagecc" @input="fineaa($attrs.messagecc)"> 
-		 </div>
-           `,
-    methods: {
-        fineaa(val) {
-            //触发父组件A中的事件
-            this.$emit('gotoaa', val)
-        }
-    }
-})
 
-Vue.component('bb', {
-	props: ['message'], //得到父组件传递过来的数据
-    data() {
-        return {
-            mymessage: this.message
+<body>
+    <div id="app">
+        {{root}}
+        <aa></aa>
+    </div>
+    <script type="text/javascript">
+    Vue.component('cc', {
+        template: `
+     <div>
+     <p>这是c组件</p>
+        <input type="text" v-model="$attrs.messagecc" @input="fineaa($attrs.messagecc)"> 
+     </div>
+           `,
+        methods: {
+            fineaa(val) {
+                //触发父组件A中的事件
+                this.$emit('gotoaa', val)
+            }
         }
-    },
-    template: `
-			 <div>
-				 <input type="text" v-model="mymessage" @input="passData(mymessage)"> 
-				 <cc v-bind="$attrs" v-on="$listeners"></cc>
-			 </div>
-               `,
-    
-    methods: {
-        passData(val) {
-            //触发父组件中的事件
-            this.$emit('getChildData', val)
-        }
-    }
-})
-Vue.component('aa', {
-	data() {
-        return {
-            message: 'hello',
-            messagecc: 'hello c' //传递给c组件的数据
-        }
-    },
-    template: `
-		 <div>
-			 <p>this is parent compoent!</p>			  
-			 <bb :message="message" 
-			     @getChildData="getChildData(message)"
-			     :messagecc="messagecc" 
-			     @gotoaa="fromcc"></bb> 			     
-		 </div>
-              `,
-    
-    methods: {
-        getChildData(val) {
-            console.log('这是来自B组件的数据')
+    })
+
+    Vue.component('bb', {
+        props: ['message'], //得到父组件传递过来的数据
+        data() {
+            return {
+                mymessage: this.message
+            }
         },
-        // 执行C子组件触发的事件
-        fromcc(val) {
-            console.log("这是来自C组件的数据：" + val)
+        template: `
+       <div>
+         <p>这是b组件</p>
+         <input type="text" v-model="mymessage" @input="passData(mymessage)"> 
+         <cc v-bind="$attrs" v-on="$listeners"></cc>
+       </div>
+               `,
+
+        methods: {
+            passData(val) {
+                //触发父组件中的事件
+                this.$emit('getChildData', val)
+            }
         }
-    }
-})
-var app = new Vue({
-    el: '#app',
-})
+    })
+    Vue.component('aa', {
+        data() {
+            return {
+                message: 'hello',
+                messagecc: 'hello c' //传递给c组件的数据
+            }
+        },
+        template: `
+     <div>
+       <p>this is aa compoent!</p>        
+       <bb :message="message" 
+           @getChildData="getChildData(message)"
+           :messagecc="messagecc" 
+           @gotoaa="fromcc"></bb>            
+     </div>
+              `,
+
+        methods: {
+            getChildData(val) {
+                console.log('这是来自B组件的数据' + val)
+            },
+            // 执行C子组件触发的事件
+            fromcc(val) {
+                console.log("这是来自C组件的数据：" + val)
+            }
+        }
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            root: '根组件'
+        }
+    })
     </script>
 </body>
 </html>
