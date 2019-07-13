@@ -56,3 +56,51 @@ destroyed（销毁后） 在实例销毁之后调用。调用后，所有的事�
 
 答：DOM 渲染在 mounted 中就已经完成了。
 
+Vue源码构建，基于Rollup
+根据format 构建格式可分为三个版（在根据有无compiler，每个版中又可以再分出二个版本）
+
+vue本质：构造函数
+function Vue(option){
+ if( process.env.NODE_ENV！==production&&！(this instanceof Vue)){
+warn('Vue is a constructor and should be called with the `new` keyword')
+}
+this._init(options)
+}
+数据驱动
+1.new Vue
+
+2.init
+
+3.Vue 实例挂载$mount
+
+4.compiler
+
+5.render Vue的_render方法是实例的一个私有方法，最终会把实例渲染成一个虚拟Node
+
+6.Virtual DOM(虚拟dom):本质上是一个原生的JS对象，用class来定义
+
+7.update的核心：调用vm.__patch__方法
+
+8.DOM：Vue最终创建的DOM
+
+组件化
+1.introduction
+
+2.createComponent
+
+3.patch
+
+4.合并配置
+
+5.生命周期
+
+6.组件注册
+
+6.1全局注册
+6.2局部注册
+7.异步组件
+
+7.1普通函数异步组件
+7.2Promise异步组件
+7.3高级异步组件
+
