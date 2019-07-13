@@ -157,3 +157,68 @@ DOM事件
 5.transition
 
 6.transition-group
+
+
+
+Vue-Router
+1.introduction
+
+Vue-Router 的能力十分强大，它支持 hash、history、abstract 3 种路由方式，提供了 和 2 种组件，还提供了简单的路由配置和一系列好用的 API。注意：本思维导图主要讲的是 hash 模式下的。
+2. 路由注册
+
+Vue.use
+
+Vue 提供了 Vue.use 的全局 API 来注册这些插件，比如注册 VueRouter。
+路由安装
+
+VueRouter 本质上是一个类，实现了 install 的静态方法：VueRouter.install = install，当执行 Vue.use(VueRouter) 的时候，实际上就是在执行 install 函数
+Vue-Router 安装最重要的一步就是利用 Vue.mixin 去把 beforeCreate 和 destroyed 钩子函数注入到每一个组件中。
+通过 Vue.component 方法定义了全局的 和 2 个组件，这也是为什么我们在写模板的时候可以使用这两个标签
+3.VueRouter对象
+
+1.VueRouter 的实现是一个类，定义了一些属性和方法。
+
+2.当我们执行 new VueRouter 的时候
+
+在浏览器不支持 history.pushState 的情况下，根据传入的 fallback 配置参数，决定是否回退到 hash 模式。
+实例化 VueRouter 后会返回它的实例 router
+3.组件在执行 beforeCreate 钩子函数的时候，如果传入了 router 实例，都会执行 router.init 进行初始化。
+
+4.然后又会执行 history.transitionTo 方法做路由过渡，进而引出了 matcher 的概念。
+
+4.matcher
+
+①createMatcher
+
+createMatcher 的初始化就是根据路由的配置描述建立映射表，包括路径、名称到路由 record 的映射关系。
+②addRoutes
+
+addRoutes 方法的作用是动态添加路由配置，因为在实际开发中有些场景是不能提前把路由写死的，需要根据一些条件动态添加路由
+function addRoutes (routes) { createRouteMap(routes, pathList, pathMap, nameMap) }
+addRoutes 的方法十分简单，再次调用 createRouteMap 即可，传入新的 routes 配置，由于 pathList、pathMap、nameMap 都是引用类型，执行 addRoutes 后会修改它们的值。
+③match
+
+match 会根据传入的位置和路径计算出新的位置并匹配到相应的路由 record ，然后根据新的位置 和 record 创建新的路径并返回。
+通过 matcher 的 match 方法，我们会找到匹配的路径 Route，这个对 Route 的切换，组件的渲染都有非常重要的指导意义。
+5.路径切换
+
+history.transitionTo
+导航守卫
+url(hash模式)
+组件
+Vuex
+1.introduction
+
+2.Vuex初始化
+
+安装
+Store实例化
+3.API
+
+数据获取
+数据存储
+语法糖
+动态更新模块
+4.插件
+
+Vuex除了提供的存取能力，还提供了插件能力，让我们可以监控store的变化过程做一些事情
