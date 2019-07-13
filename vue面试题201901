@@ -197,3 +197,58 @@ include 和 exclude 的属性允许组件有条件地缓存。二者都可以用
 11.怎么定义 vue-router 的动态路由? 怎么获取传过来的值
 
 答：在 router 目录下的 index.js 文件中，对 path 属性加上 /:id，使用 router 对象的 params.id 获取。
+
+
+项目目录结构
+
+
+
+图片描述(最多50字)
+核心项目结构
+
+
+
+图片描述(最多50字)
+文件功能解释
+scripts：构建相关的文件，一般情况下我们不需要动
+
+dist:构建后文件的输出目录
+
+examples：存放一些使用vue开发的应用案例
+
+flow：类型声明，使用开源项目Flow
+
+packages：存放独立发布的包的目录
+
+test：包含所有测试文件
+
+types:typescript类型声明文件
+
+src：源码重点
+1.compiler：编译器代码的存放目录，将template编译为render函数
+
+2.core：核心代码，与平台无关的代码
+
+3.platforms：不同平台的支持，包含平台特有的相关代码，不同平台的不同构建的入口文件也在这里
+
+4.serve：服务端渲染，包含server-side rendering 的相关代码
+
+5.sfc:包含单文件组件（.vue文件）的解析逻辑，用于vue-template-compiler包
+
+6.shared：共享代码，包含整个代码库通用的代码
+
+package.json:对项目的描述文件，包含了依赖包等信息
+
+yarn.lock: yarn锁定文件
+
+.editorconfig：针对编辑器的编码风格配置文件
+
+.flowconfig:flow的配置文件
+
+.babelrc.js:babel配置文件
+
+.eslintrc.js:eslint配置文件
+
+.eslintignore:eslint忽略配置
+
+.gitignore：git忽略配置
