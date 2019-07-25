@@ -87,3 +87,62 @@
     </script>
 </body>
 </html>
+
+
+
+
+------------------------------------------------------------------------
+
+2019.07.15
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>$attrs\$listeners</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child 
+        :aa="aa" 
+        :bb="bb" 
+        @one.native="haveNative"   
+        @two="noNative">
+        </child>
+    </div>
+    <script type="text/javascript">
+    let Child = Vue.extend({
+        template: '<h2>{{ aa }}</h2>',
+        props: ['aa'],  
+        inheritAttrs: true,
+        created() {
+            console.log('aa在子组件已经声明，那我就获取父组件剩下的属性，如bb：')
+            console.log(this.$attrs)
+            console.log('one事件名有native修饰，我就获取剩下的事件名，如two：')
+            console.log(this.$listeners)
+            this.$listeners.two()
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            aa: 'parent aa',
+            bb: 'parent bb'
+        },
+        components: {
+            Child
+        },
+        methods: {
+            haveNative() {
+                alert('one')
+            },
+            noNative() {
+                alert('two')
+            }
+        }
+    })
+    </script>
+</body>
+</html>
