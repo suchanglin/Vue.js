@@ -53,3 +53,57 @@
     </script>
 </body>
 </html>
+
+
+
+-----------------------------------------
+20190806
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>.sync</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.9/vue.js"></script>
+</head>
+
+<body>
+    <div id="demo">
+        <!-- <demo :title="doc.title" @update:title = "doc.title=$event"></demo> -->
+        <demo :title.sync="doc.title"></demo>
+    </div>
+    <script>
+    var demo = {
+        template: `<div>
+                    {{title}}
+                  </div>`,
+        props: {
+            title: ""
+        },
+        data() {
+            return {
+                newTitle: "子组件的title"
+            }
+        },
+        mounted() {
+            this.$emit('update:title', this.newTitle);
+        },
+    }
+    var vm = new Vue({
+        el: "#demo",
+        data: {
+            doc: {
+                title: 'index'
+            },
+        },
+        mounted() {
+            alert(this.doc.title);
+        },
+        components: {
+            demo
+        }
+    })
+    </script>
+</body>
+
+</html>
