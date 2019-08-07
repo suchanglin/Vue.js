@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app-1">
         {{message}}
     </div>
     <div id="app-2">
@@ -47,8 +47,8 @@
         <p>Computed reversed message: "{{ reversedMessage }}"</p>
     </div>
     <script type="text/javascript">
-    var app = new Vue({
-        el: '#app',
+    var app1 = new Vue({
+        el: '#app-1',
         data: {
 
             message: 'Hello World!'
@@ -117,7 +117,7 @@
         }
     })
 
-    var vm = new Vue({
+    var app8= new Vue({
         el: '#app-8',
         data: {
             message: 'Hello'
@@ -125,7 +125,7 @@
         computed: {
             // 计算属性的 getter
             reversedMessage: function() {
-                // `this` 指向 vm 实例
+                // `this` 指向 app8 实例
                 return this.message.split('').reverse().join('')
             }
         }
