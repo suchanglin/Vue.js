@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>嵌套路由</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <div id="app">
+        <div>一秒后：</div>
+        <async-example></async-example>
+    </div>
+    <script type="text/javascript">
+    var bian = {
+        template: `<div><div v-show="flag">I am async!</div></div>`,
+        data() {
+            return {
+                flag: true
+            }
+        },
+        methods: {
+            test() {
+                va = this
+                var timer = setInterval(function() {
+                    if (va.flag) {
+                        va.flag = !va.flag
+                    } else {
+                        va.flag = !va.flag
+                    }
+                }, 1000)
+            }
+
+        },
+        mounted() {
+            this.test();
+        }
+    };
+    Vue.component('async-example', function(resolve, reject) {
+        setTimeout(function() {
+            resolve(bian)
+        }, 1000)
+
+    })
+    new Vue({
+        el: '#app',
+
+    })
+    </script>
+</body>
+
+</html>
