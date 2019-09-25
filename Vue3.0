@@ -78,10 +78,3 @@ const App = {
     // `state` exposes bindings returned from `setup()` (with value wrappers unwrapped)
   }
 }
-
-
-
-
--------------------------------------
-2019.0718
-value又改了
