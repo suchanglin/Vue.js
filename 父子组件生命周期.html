@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <keep-alive>
+            <my-components :msg="msg1" v-if="show"></my-components>
+        </keep-alive>
+    </div>
+</body>
+<script>
+var child = {
+    template: '<div>from child: {{childMsg}}</div>',
+    props: ['msg'],
+    data: function() {
+        return {
+            childMsg: 'child'
+        }
+    },
+    beforeCreate: function() {
+        debugger;
+    },
+    created: function() {
+        debugger;
+    },
+    beforeMount: function() {
+        debugger;
+    },
+    mounted: function() {
+        debugger;
+    },
+    deactivated: function() {
+        // alert("keepAlive停用");
+        debugger;
+    },
+    activated: function() {
+        // 
+        debugger;
+    },
+    beforeDestroy: function() {
+        console.group('beforeDestroy 销毁前状态===============》');
+        var state = {
+            'el': this.$el,
+            'data': this.$data,
+            'message': this.message
+        }
+        console.log(this.$el);
+        console.log(state);
+    },
+    destroyed: function() {
+        console.group('destroyed 销毁完成状态===============》');
+        var state = {
+            'el': this.$el,
+            'data': this.$data,
+            'message': this.message
+        }
+        console.log(this.$el);
+        console.log(state);
+    },
+};
+
+var vm = new Vue({
+    el: '#app',
+    data: {
+        message: 'father',
+        msg1: "hello",
+        show: true
+    },
+    beforeCreate: function() {
+        debugger;
+    },
+    created: function() {
+        debugger;
+    },
+    beforeMount: function() {
+        debugger;
+    },
+    mounted: function() {
+        debugger;
+    },
+    beforeUpdate: function() {
+        alert("页面视图更新前");
+
+    },
+    updated: function() {
+        alert("页面视图更新后");
+    },
+    beforeDestroy: function() {
+        console.group('beforeDestroy 销毁前状态===============》');
+        var state = {
+            'el': this.$el,
+            'data': this.$data,
+            'message': this.message
+        }
+        console.log(this.$el);
+        console.log(state);
+    },
+    destroyed: function() {
+        console.group('destroyed 销毁完成状态===============》');
+        var state = {
+            'el': this.$el,
+            'data': this.$data,
+            'message': this.message
+        }
+        console.log(this.$el);
+        console.log(state);
+    },
+    components: {
+        'my-components': child
+    }
+});
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+参考：https://www.jb51.net/article/145474.htm
