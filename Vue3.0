@@ -58,7 +58,7 @@ const App = {
     // dependency injection
     const injected = inject(SomeSymbol)
 
-    // other options like el, extends and mixins are no longer necessary
+    
 
     // expose bindings on render context
     // any value containers will be unwrapped when exposed
