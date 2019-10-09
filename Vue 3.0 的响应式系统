@@ -1,0 +1,29 @@
+
+在初始化阶段，主要做了两件事。
+
+把 origin 对象转化成响应式的 Proxy 对象 state。
+把函数 fn() 作为一个响应式的 effect 函数。
+
+首先我们来分析第一件事。
+大家都知道，Vue 3.0 使用了 Proxy 来代替之前的 Object.defineProperty()，改写了对象的 getter/setter，完成依赖收集和响应触发。但是在这一阶段中，我们暂时先不管它是如何改写对象的 getter/setter 的，这个在后续的”依赖收集阶段“会详细说明。为了简单起见，我们可以把这部分的内容浓缩成一个只有两行代码的 reactive() 函数：
+export function reactive(target) {
+  const observed = new Proxy(target, handler)
+  return observed
+}
+
+接下来我们分析第二件事。
+当一个普通的函数 fn() 被 effect() 包裹之后，就会变成一个响应式的 effect 函数，而 fn() 也会被立即执行一次。
+由于在 fn() 里面有引用到 Proxy 对象的属性，所以这一步会触发对象的 getter，从而启动依赖收集。
+除此之外，这个 effect 函数也会被压入一个名为”activeReactiveEffectStack“（此处为 effectStack）的栈中，供后续依赖收集的时候使用。
+
+
+依赖收集
+这个阶段的触发时机，就是在 effect 被立即执行，其内部的 fn() 触发了 Proxy 对象的 getter 的时候。简单来说，只要执行到类似 state.count 的语句，就会触发 state 的 getter。
+依赖收集阶段最重要的目的，就是建立一份”依赖收集表“，也就是图示的”targetMap"。targetMap 是一个 WeakMap，其 key 值是当前的 Proxy 对象 state，而 value 则是该对象所对应的 depsMap。
+depsMap 是一个 Map，key 值为触发 getter 时的属性值（此处为 count），而 value 则是触发过该属性值所对应的各个 effect。
+
+
+响应阶段
+当修改对象的某个属性值的时候，会触发对应的 setter。
+setter 里面的 trigger() 函数会从依赖收集表里找到当前属性对应的各个 dep，然后把它们推入到 effects 和 computedEffects（计算属性） 队列中，最后通过 scheduleRun() 挨个执行里面的 effect。
+
